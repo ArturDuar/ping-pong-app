@@ -1,0 +1,54 @@
+services:
+  backend:
+    build: ./proyecto-catedra-api
+    container_name: proyecto-catedra-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    networks:
+      - appnet
+    volumes:
+      - ./proyecto-catedra-api:/var/www/html
+
+  frontend:
+    build: ./proyecto-catedra-frontend
+    container_name: proyecto-catedra-frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - appnet
+    volumes:
+      - ./proyecto-catedra-frontend:/app
+
+  db:
+    image: mysql:latest
+    container_name: proyecto-catedra-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 123456
+      MYSQL_DATABASE: libreria
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - appnet
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: proyecto-catedra-phpmyadmin
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+    depends_on:
+      - db
+    networks:
+      - appnet
+
+networks:
+  appnet:
+    driver: bridge
+
+volumes:
+  db_data:
