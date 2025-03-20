@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from 'react';
+import { useRouter } from 'next/navigation'; // Importa useRouter
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaUser, FaLock, FaEnvelope, FaPhone, FaIdCard } from 'react-icons/fa';
@@ -16,6 +17,8 @@ export default function SignUp() {
     contrasena: ''
   });
 
+  const router = useRouter(); // Inicializa useRouter
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -27,6 +30,9 @@ export default function SignUp() {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log('Sign up data:', formData);
+
+    // Redirige a la página principal
+    router.push('/paginaPrincipal'); // Ajusta la ruta
   };
 
   return (
