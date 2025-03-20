@@ -2,11 +2,9 @@
 
 import { useState } from "react";
 import { FaUser, FaChartBar, FaUsers, FaTableTennis, FaSignOutAlt } from "react-icons/fa";
-import Link from "next/link";  // Importa Link de Next.js
-import Image from "next/image";  // Si necesitas imágenes optimizadas en Next.js
-import '../globals.css';  // Asegúrate de que el archivo de estilo esté correctamente referenciado
-import CrearTorneo from './Pages/creartorneo';  // Importa correctamente las páginas
-import CrearJugador from './Pages/ingresarjugador';
+import Link from "next/link";
+import Image from "next/image";
+import '../globals.css';
 
 const Header = () => {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -15,9 +13,9 @@ const Header = () => {
     <header className="header">
       <img src="/img/Logo/nombreSolo_blanco.png" alt="Logo Ping Pong" className="logo" />
       <nav className="nav">
-        <Link href="/torneos" className="nav-link">Torneos</Link>
-        <Link href="/jugadores" className="nav-link">Jugadores</Link>
-        <Link href="/estadisticas" className="nav-link">Estadísticas</Link>
+        <Link href="/paginaPrincipal/creartorneo" className="nav-link">Torneos</Link>
+        <Link href="/paginaPrincipal/ingresarjugador" className="nav-link">Jugadores</Link>
+        <Link href="/paginaPrincipal/estadisticas" className="nav-link">Estadísticas</Link>
       </nav>
       <div className="user-menu">
         <button className="user-button" onClick={() => setMenuOpen(!menuOpen)}>
@@ -51,9 +49,9 @@ const Home = () => (
     <br />
     
     <div className="card-container">
-      <Card icon={<FaTableTennis size={200} />} title="Gestionar torneos" link="/Pages/creartorneo" />
-      <Card icon={<FaUsers size={200} />} title="Gestionar jugadores" link="/Pages/ingresarjugador" />
-      <Card icon={<FaChartBar size={200} />} title="Ver estadísticas" link="/Pages/estadisticas" />
+      <Card icon={<FaTableTennis size={200} />} title="Gestionar torneos" link="/paginaPrincipal/creartorneo" />
+      <Card icon={<FaUsers size={200} />} title="Gestionar jugadores" link="/paginaPrincipal/ingresarJugador" />
+      <Card icon={<FaChartBar size={200} />} title="Ver estadísticas" link="/paginaPrincipal/estadisticas" />
     </div>
   </div>
 );
@@ -68,18 +66,9 @@ const Card = ({ icon, title, link }) => (
 const paginaPrincipal = () => (
   <>
     <Header />
-    {/* Páginas definidas dentro de Next.js */}
-    <Routes>
-      <Route path="/" element={<Home />} />
-      <Route path="/torneos" element={<h2 className="content-title">Gestión de torneos</h2>} />
-      <Route path="/jugadores" element={<h2 className="content-title">Gestión de jugadores</h2>} />
-      <Route path="/estadisticas" element={<h2 className="content-title">Estadísticas</h2>} />
-      <Route path="/perfil" element={<h2 className="content-title">Perfil de Usuario</h2>} />
-      <Route path="/Pages/creartorneo" element={<CrearTorneo />} />
-      <Route path="/Pages/ingresarjugador" element={<CrearJugador />} />
-    </Routes>
+    <Home />
     <Footer />
   </>
 );
 
-export default paginaPrincipal; // Cambia la exportación para que sea consistente
+export default paginaPrincipal;

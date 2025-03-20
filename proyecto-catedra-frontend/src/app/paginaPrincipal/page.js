@@ -13,9 +13,9 @@ const Header = () => {
     <header className="header">
       <img src="/img/Logo/nombreSolo_blanco.png" alt="Logo Ping Pong" className="logo" />
       <nav className="nav">
-        <Link href="/torneos" className="nav-link">Torneos</Link>
-        <Link href="/jugadores" className="nav-link">Jugadores</Link>
-        <Link href="/estadisticas" className="nav-link">Estadísticas</Link>
+        <Link href="/paginaPrincipal/crearTorneo" className="nav-link">Torneos</Link>
+        <Link href="/paginaPrincipal/ingresarJugador" className="nav-link">Jugadores</Link>
+        <Link href="/paginaPrincipal/estadisticas" className="nav-link">Estadísticas</Link>
       </nav>
       <div className="user-menu">
         <button className="user-button" onClick={() => setMenuOpen(!menuOpen)}>
@@ -49,8 +49,8 @@ const Home = () => (
     <br />
     
     <div className="card-container">
-      <Card icon={<FaTableTennis size={200} />} title="Gestionar torneos" link="/paginaPrincipal/creartorneo" />
-      <Card icon={<FaUsers size={200} />} title="Gestionar jugadores" link="/paginaPrincipal/ingresarjugador" />
+      <Card icon={<FaTableTennis size={200} />} title="Gestionar torneos" link="/paginaPrincipal/crearTorneo" />
+      <Card icon={<FaUsers size={200} />} title="Gestionar jugadores" link="/paginaPrincipal/ingresarJugador" />
       <Card icon={<FaChartBar size={200} />} title="Ver estadísticas" link="/paginaPrincipal/estadisticas" />
     </div>
   </div>
