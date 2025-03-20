@@ -13,17 +13,10 @@ spec:
         app: proyecto-catedra-api
     spec:
       containers:
-<<<<<<< Updated upstream
-        - name: proyecto-catedra-api
-          image: proyecto-catedra-api:latest
-          ports:
-            - containerPort: 8000
-=======
       - name: proyecto-catedra-api
         image: proyecto-catedra-api:latest
         ports:
         - containerPort: 8000
->>>>>>> Stashed changes
 ---
 apiVersion: v1
 kind: Service

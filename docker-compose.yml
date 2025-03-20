@@ -40,11 +40,7 @@ services:
     ports:
       - "8081:80"
     environment:
-<<<<<<< Updated upstream
-      PMA_HOST: db
-=======
       PMA_HOST: db  
->>>>>>> Stashed changes
     depends_on:
       - db
     networks:
