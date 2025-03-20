@@ -1,95 +1,78 @@
-import Image from "next/image";
-import styles from "./page.module.css";
+"use client";
 
-export default function Home() {
+import { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { FaUser, FaLock } from 'react-icons/fa';
+import styles from '../app/pages.module.css';
+
+export default function Login() {
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Login attempt:', { username, password });
+  };
+
   return (
-    <div className={styles.page}>
+    <div className={styles.container}>
       <main className={styles.main}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol>
-          <li>
-            Get started by editing <code>src/app/page.js</code>.
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
-
-        <div className={styles.ctas}>
-          <a
-            className={styles.primary}
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className={styles.logo}
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className={styles.secondary}
-          >
-            Read our docs
-          </a>
+        <div className={styles.loginWrapper}>
+          <div className={styles.loginForm}>
+            <h1 className={styles.pingPongTitle}>ping pong</h1>
+            
+            <form onSubmit={handleSubmit}>
+              <div className={styles.inputGroup}>
+                <FaUser className={styles.inputIcon} />
+                <input
+                  type="text"
+                  placeholder="Usuario"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                  className={styles.input}
+                  required
+                />
+              </div>
+              
+              <div className={styles.inputGroup}>
+                <FaLock className={styles.inputIcon} />
+                <input
+                  type="password"
+                  placeholder="Contraseña"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className={styles.input}
+                  required
+                />
+              </div>
+              
+              <button type="submit" className={styles.loginButton}>
+                Login
+              </button>
+            </form>
+            
+            <div className={styles.signupSection}>
+              <p>No tienes cuenta?</p>
+              <Link href="/signup">
+                <button className={styles.signupButton}>Sign up</button>
+              </Link>
+            </div>
+          </div>
+          
+          <div className={styles.logoSection}>
+            <div className={styles.logoWrapper}>
+              <Image
+                src="/img/image1.png"
+                alt="Ping Pong Team Logo"
+                width={700}
+                height={607}
+                priority
+              />
+            </div>
+          </div>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
