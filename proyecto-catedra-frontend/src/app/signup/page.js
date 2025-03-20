@@ -32,7 +32,7 @@ export default function SignUp() {
     console.log('Sign up data:', formData);
 
     // Redirige a la página principal
-    router.push('/paginaPrincipal'); // Ajusta la ruta
+    router.push('/paginaPrincipal'); // Asegúrate de que esta ruta sea válida
   };
 
   return (

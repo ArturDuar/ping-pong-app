@@ -1,3 +1,4 @@
+"use client";
 import React, { useState } from 'react';
 import Link from 'next/link'; // Cambia a Link de Next.js
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';
@@ -10,8 +11,8 @@ const Header = () => {
     <header className="header">
       <img src="/img/Logo/nombreSolo_blanco.png" alt="Logo Ping Pong" className="logo" />
       <nav className="nav">
-        <Link href="/paginaPrincipal/creartorneo" className="nav-link">Torneos</Link>
-        <Link href="/paginaPrincipal/ingresarjugador" className="nav-link">Jugadores</Link>
+        <Link href="/paginaPrincipal/crearTorneo" className="nav-link">Torneos</Link>
+        <Link href="/paginaPrincipal/ingresarJugador" className="nav-link">Jugadores</Link>
         <Link href="/paginaPrincipal/estadisticas" className="nav-link">Estadísticas</Link>
       </nav>
       <div className="user-menu">

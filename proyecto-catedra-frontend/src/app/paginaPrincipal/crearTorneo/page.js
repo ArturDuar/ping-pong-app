@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useState } from 'react';
 import Link from 'next/link'; // Cambia a Link de Next.js
 import { FaUser, FaSignOutAlt } from 'react-icons/fa';

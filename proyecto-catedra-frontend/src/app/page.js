@@ -16,7 +16,7 @@ export default function LoginPage() {
     e.preventDefault();
     console.log("Login attempt:", { username, password });
     // Redirigir a la página principal después de un login exitoso
-    router.push("/paginaPrincipal"); // Redirige a la página principal
+    router.push("/paginaPrincipal"); // Asegúrate de que esta ruta sea válida
   };
 
   return (
