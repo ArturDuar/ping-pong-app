@@ -11,17 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('torneo', function (Blueprint $table) {
+        Schema::create('torneos', function (Blueprint $table) {
             $table->id()->autoIncrement();
             $table->string('nombre_torneo');
-            $table->text('descripcion');
+            $table->text('descripcion')->nullable();
             $table->string('lugar_evento');
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->string('categoria_genero');
 
-            $table->foreignId('id_usuario')->constrained('users');
-            $table->foreignId('id_estado')->constrained('estado')->default(1);
+            $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
+            $table->foreignId('id_estado')->constrained('estados')->onDelete('cascade')->default(1);
+
 
             $table->timestamps();
         });
@@ -32,6 +33,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('torneo');
+        Schema::dropIfExists('torneos');
     }
 };

@@ -46,4 +46,12 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function torneo(){
+        return $this->hasMany(Torneo::class, 'id_usuario');
+    }
+
+    public function jugador(){
+        return $this->hasMany(Jugador::class, 'id_usuario');
+    }
 }

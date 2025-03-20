@@ -9,8 +9,6 @@ class Torneo extends Model
 {
     use HasFactory;
 
-    protected $table = 'torneo';
-
     protected $fillable = [
         'nombre_torneo',
         'descripcion',
@@ -25,5 +23,10 @@ class Torneo extends Model
     public function usuario()
     {
         return $this->belongsTo(User::class, 'id_usuario');
+    }
+
+    public function estado()
+    {
+        return $this->belongsTo(Estado::class, 'id_estado');
     }
 }

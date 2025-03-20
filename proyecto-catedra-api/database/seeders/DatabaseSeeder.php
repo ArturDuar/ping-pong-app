@@ -2,6 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Jugador;
+use App\Models\Torneo;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -21,9 +23,13 @@ class DatabaseSeeder extends Seeder
             'password' => '1234',
         ]);
 
-        DB::table('estado')->insert([
-            ['nombre_estado' => 'En Curso'],
+        User::factory(2)->create();
+        Jugador::factory(3)->create();
+        Torneo::factory(3)->create();
+
+        DB::table('estados')->insert([
             ['nombre_estado' => 'Próximo'],
+            ['nombre_estado' => 'En Curso'],
             ['nombre_estado' => 'Finalizado']
         ]);
     }
