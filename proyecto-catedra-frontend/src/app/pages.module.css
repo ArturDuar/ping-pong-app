@@ -1,0 +1,147 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #121212;
+}
+
+.main {
+  width: 100%;
+  max-width: 882px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginWrapper {
+  display: flex;
+  width: 100%;
+  min-height: 600px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+
+.loginForm {
+  flex: 1;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #1a1a1a;
+}
+
+.pingPongTitle {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  color: white;
+  transform: skewX(-5deg);
+  letter-spacing: 1px;
+  text-shadow: 
+    -1px -1px 0 #551146,
+    2px 2px 0 #551146,
+    3px 3px 0 #83304F,
+    4px 4px 3px rgba(0, 0, 0, 0.5);
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #777;
+}
+
+.input {
+  width: 100%;
+  padding: 12px 12px 12px 40px;
+  border: none;
+  border-radius: 4px;
+  background-color: #333;
+  color: white;
+  font-size: 1rem;
+}
+
+.input::placeholder {
+  color: #777;
+}
+
+.loginButton {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  border-radius: 4px;
+  background-color: #6d165e;
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.loginButton:hover {
+  background-color: #83304F; 
+}
+
+.signupSection {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.signupSection p {
+  color: #aaa;
+}
+
+.signupButton {
+  background-color: transparent;
+  border: none;
+  color: #6d165e;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.signupButton:hover {
+  background-color: rgba(174, 71, 111, 0.1);
+}
+
+.logoSection {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #0D0000; 
+  position: relative;
+  overflow: hidden;
+}
+
+.logoWrapper {
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .loginWrapper {
+    flex-direction: column;
+  }
+  
+  .logoSection {
+    min-height: 300px;
+  }
+}
