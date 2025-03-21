@@ -1,19 +1,16 @@
 "use client";
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
-import { FaUser, FaLock, FaEnvelope, FaPhone, FaIdCard } from 'react-icons/fa';
+import Image from 'next/image';
 import styles from './signup.module.css';
 
 export default function SignUp() {
   const [formData, setFormData] = useState({
     usuario: '',
-    nombre: '',
-    apellido: '',
-    telefono: '',
     email: '',
-    contrasena: ''
+    contrasena: '',
+    confirmarContrasena: ''
   });
 
   const handleChange = (e) => {
@@ -33,12 +30,21 @@ export default function SignUp() {
     <div className={styles.container}>
       <main className={styles.main}>
         <div className={styles.signupWrapper}>
-          <div className={styles.formSection}>
-            <h1 className={styles.pingPongTitle}>ping pong</h1>
+          <div className={styles.formContainer}>
+            <div className={styles.titleSection}>
+              <Image 
+                src="/img/logo.png" 
+                alt="PING PONG CHAMPIONSHIP" 
+                width={200}
+                height={80}
+                className={styles.logo}
+              />
+            </div>
+            
+            <h2 className={styles.crearCuenta}>Crear cuenta</h2>
             
             <form onSubmit={handleSubmit}>
               <div className={styles.inputGroup}>
-                <FaUser className={styles.inputIcon} />
                 <input
                   type="text"
                   placeholder="Usuario"
@@ -51,49 +57,9 @@ export default function SignUp() {
               </div>
               
               <div className={styles.inputGroup}>
-                <FaIdCard className={styles.inputIcon} />
-                <input
-                  type="text"
-                  placeholder="Nombre"
-                  name="nombre"
-                  value={formData.nombre}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </div>
-              
-              <div className={styles.inputGroup}>
-                <FaIdCard className={styles.inputIcon} />
-                <input
-                  type="text"
-                  placeholder="Apellido"
-                  name="apellido"
-                  value={formData.apellido}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </div>
-              
-              <div className={styles.inputGroup}>
-                <FaPhone className={styles.inputIcon} />
-                <input
-                  type="tel"
-                  placeholder="Telefono"
-                  name="telefono"
-                  value={formData.telefono}
-                  onChange={handleChange}
-                  className={styles.input}
-                  required
-                />
-              </div>
-              
-              <div className={styles.inputGroup}>
-                <FaEnvelope className={styles.inputIcon} />
                 <input
                   type="email"
-                  placeholder="Email"
+                  placeholder="Correo Electrónico"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
@@ -103,12 +69,23 @@ export default function SignUp() {
               </div>
               
               <div className={styles.inputGroup}>
-                <FaLock className={styles.inputIcon} />
                 <input
                   type="password"
                   placeholder="Contraseña"
                   name="contrasena"
                   value={formData.contrasena}
+                  onChange={handleChange}
+                  className={styles.input}
+                  required
+                />
+              </div>
+              
+              <div className={styles.inputGroup}>
+                <input
+                  type="password"
+                  placeholder="Confirmar contraseña"
+                  name="confirmarContrasena"
+                  value={formData.confirmarContrasena}
                   onChange={handleChange}
                   className={styles.input}
                   required
@@ -121,26 +98,15 @@ export default function SignUp() {
             </form>
             
             <div className={styles.loginLink}>
-              <Link href="/page">
-                <button className={styles.loginButton}>Volver al Login</button>
+              <span>¿Ya tienes cuenta?</span>
+              <Link href="/" className={styles.inicioSesion}>
+                Inicia sesión
               </Link>
-            </div>
-          </div>
-          
-          <div className={styles.logoSection}>
-            <div className={styles.logoWrapper}>
-              <Image
-                src="/img/image1.png"
-                alt="Ping Pong Team Logo"
-                width={650}
-                height={607}
-                priority
-              />
             </div>
           </div>
         </div>
         
-        <div className={styles.footerBar}></div>
+        <div className={styles.footerbar}></div>
       </main>
     </div>
   );
