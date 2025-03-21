@@ -22,92 +22,82 @@ export default function SignUp() {
   };
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     console.log('Sign up data:', formData);
   };
 
   return (
-    <div className={styles.container}>
-      <main className={styles.main}>
-        <div className={styles.signupWrapper}>
-          <div className={styles.formContainer}>
-            <div className={styles.titleSection}>
-              <Image 
-                src="/img/logo.png" 
+    <div className="containerCard">
+      <main className="main">
+        <div className="signupWrapper">
+          <div className="formContainer">
+            <div className="titleSection">
+              <img 
+                src="/img/logos/logo_blanco.png" 
                 alt="PING PONG CHAMPIONSHIP" 
-                width={200}
-                height={80}
-                className={styles.logo}
+                width="200"
+                height="80"
+                className="logo"
               />
             </div>
             
-            <h2 className={styles.crearCuenta}>Crear cuenta</h2>
+            <h2 className="crearCuenta">Crear cuenta</h2>
             
-            <form onSubmit={handleSubmit}>
-              <div className={styles.inputGroup}>
+            <form>
+              <div className="inputGroup">
                 <input
                   type="text"
                   placeholder="Usuario"
                   name="usuario"
-                  value={formData.usuario}
-                  onChange={handleChange}
-                  className={styles.input}
+                  className="input"
                   required
                 />
               </div>
               
-              <div className={styles.inputGroup}>
+              <div className="inputGroup">
                 <input
                   type="email"
                   placeholder="Correo Electrónico"
                   name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={styles.input}
+                  className="input"
                   required
                 />
               </div>
               
-              <div className={styles.inputGroup}>
+              <div className="inputGroup">
                 <input
                   type="password"
                   placeholder="Contraseña"
                   name="contrasena"
-                  value={formData.contrasena}
-                  onChange={handleChange}
-                  className={styles.input}
+                  className="input"
                   required
                 />
               </div>
               
-              <div className={styles.inputGroup}>
+              <div className="inputGroup">
                 <input
                   type="password"
                   placeholder="Confirmar contraseña"
                   name="confirmarContrasena"
-                  value={formData.confirmarContrasena}
-                  onChange={handleChange}
-                  className={styles.input}
+                  className="input"
                   required
                 />
               </div>
               
-              <button type="submit" className={styles.submitButton}>
+              <button type="submit" className="submitButton">
                 Crear Cuenta
               </button>
             </form>
             
-            <div className={styles.loginLink}>
+            <div className="loginLink">
               <span>¿Ya tienes cuenta?</span>
-              <Link href="/" className={styles.inicioSesion}>
+              <a href="/" className="inicioSesion">
                 Inicia sesión
-              </Link>
+              </a>
             </div>
           </div>
         </div>
-        
-        <div className={styles.footerbar}></div>
       </main>
     </div>
+
   );
 }
