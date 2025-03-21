@@ -29,13 +29,13 @@ export default function PaginaPrincipal(){
             <div className="col-lg-6">
               <div className="row g-2 g-lg-3 ">
                 <div className="col-6 col-md-4 col-lg-6">
-                  <Card icon={<FaTableTennis size="75%" color="#129FFF"/>} title="Gestionar torneos" />
+                  <Card icon={<FaTableTennis size="75%" color="#129FFF"/>} title="Gestionar torneos" link="/dashboard/torneo"/>
                 </div> 
                 <div className="col-6 col-md-4 col-lg-6">
-                  <Card icon={<FaUsers size="75%" color="#AA12AF"/>} title="Gestionar jugadores" />
+                  <Card icon={<FaUsers size="75%" color="#AA12AF"/>} title="Gestionar jugadores" link="dashboard/jugador"/>
                 </div>
                 <div className="col-6 col-md-4 col-lg-6 mx-auto">
-                  <Card icon={<FaChartBar size="75%" color="#129FAF"/>} title="Ver estadísticas" />
+                  <Card icon={<FaChartBar size="75%" color="#129FAF"/>} title="Ver estadísticas" link=""/>
                 </div>
               </div>
             </div>

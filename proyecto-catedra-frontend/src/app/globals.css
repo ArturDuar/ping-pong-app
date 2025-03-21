@@ -521,3 +521,199 @@ input::placeholder {
     height: auto;
   }
 }
+
+
+/* Estilos para la página de jugadores y torneo individual*/
+
+
+.jugadores-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media screen and (max-width: 768px) {
+  .jugadores-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+}
+
+.jugador-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  border-radius: 12px;
+  padding: 20px;
+  text-align: center;
+  color: var(--text-light);
+}
+
+.jugador-imagen {
+  width: 100%;
+  max-height: 180px;
+  object-fit: contain;
+  margin-bottom: 10px;
+  background-color: var(--hover);
+  border-radius: 8px;
+}
+
+.ver-mas-button {
+  background: white;
+  color: black;
+  padding: 8px 12px;
+  margin-top: 10px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.nuevo-jugador-card {
+  background: var(--dropdown-bg);
+  border: 2px solid var(--dropdown-border);
+  border-radius: 12px;
+  padding: 20px;
+  max-width: 300px;
+  text-align: center;
+  color: var(--text-light);
+  align-self: flex-start;
+}
+
+.nuevo-jugador-button {
+  background: white;
+  color: black;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.torneo-container {
+  padding: 30px;
+  background: var(--background);
+  color: var(--text-light);
+  min-height: 100vh;
+}
+
+.torneo-title {
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.torneo-content {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.torneo-graphic-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  padding: 20px;
+  border-radius: 12px;
+  text-align: center;
+  width: 400px;
+}
+
+.torneo-graphic-img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.btn-proximo {
+  background: green;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.btn-proximo:hover {
+  background: darkgreen;
+}
+
+/* Detalles del torneo */
+.torneo-detalles-card {
+  background: var(--card-bg);
+  border: 2px solid var(--card-border);
+  padding: 20px;
+  border-radius: 12px;
+  width: 400px;
+}
+
+.torneo-detalles-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin-bottom: 12px;
+}
+
+.torneo-detalles-list {
+  list-style: none;
+  padding: 0;
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.torneo-detalles-list li {
+  margin-bottom: 8px;
+}
+
+/* Botones */
+.torneo-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-pink {
+  background: var(--secondary);
+  color: var(--text-light);
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-pink:hover {
+  background: var(--primary);
+}
+
+.btn-white {
+  background: white;
+  color: black;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-white:hover {
+  background: var(--secondary);
+  color: var(--text-light);
+}
+
+.btn-dark {
+  background: #333;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-dark:hover {
+  background: var(--card-border);
+}
+
