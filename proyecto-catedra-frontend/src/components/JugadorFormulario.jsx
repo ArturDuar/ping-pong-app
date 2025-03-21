@@ -1,41 +1,8 @@
 import React, { useState } from 'react';
-import '@/app/globals.css'; 
+import Link from "next/link";
+import '@/app/globals.css';
 
-
-const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-  
-    return (
-      <header className="header">
-        <img src="/img/Logo/nombreSolo_blanco.png" alt="Logo Ping Pong" className="logo" />
-        <nav className="nav">
-          <Link to="/torneos" className="nav-link">Torneos</Link>
-          <Link to="/jugadores" className="nav-link">Jugadores</Link>
-          <Link to="/estadisticas" className="nav-link">Estadísticas</Link>
-        </nav>
-        <div className="user-menu">
-          <button className="user-button" onClick={() => setMenuOpen(!menuOpen)}>
-            <FaUser size={20} />
-            <span>Username</span>
-          </button>
-          {menuOpen && (
-            <div className="dropdown">
-              <Link to="/perfil" className="dropdown-item">Ver Perfil</Link>
-              <button className="dropdown-item flex items-center">
-                <FaSignOutAlt size={16} className="icon" /> Cerrar sesión
-              </button>
-            </div>
-          )}
-        </div>
-      </header>
-    );
-  };
-  
-  const Footer = () => (
-    <footer className="footer">&copy; 2025 Ping Pong Championship</footer>
-  );
-
-  const CrearJugador = () => {
+const CrearJugador = () => {
     return (
         <div className="content">
             <h2 className="title">Crear nuevo jugador</h2>
@@ -85,17 +52,21 @@ const Header = () => {
                     </div>
                 </div>
                 <div className="form-group">
-                        <label htmlFor="genero">Genero</label>
-                        <select id="generos">
-                            <option value="">Seleccione un genero</option>
-                            <option value="masculino">Masculino</option>
-                            <option value="femenino">Femenino</option>
-                        </select>
-                    </div>
-                
+                    <label htmlFor="genero">Genero</label>
+                    <select id="generos">
+                        <option value="">Seleccione un genero</option>
+                        <option value="masculino">Masculino</option>
+                        <option value="femenino">Femenino</option>
+                    </select>
+                </div>
+
                 <div className="button-group">
-                    <button className="button button-primary">Crear jugador</button>
-                    <button className="button button-secondary">Cancelar</button>
+                    <Link href="/dashboard/jugador">
+                        <button className="button button-primary">Crear jugador</button>
+                    </Link>
+                    <Link href="/dashboard/jugador">
+                        <button className="button button-secondary">Cancelar</button>
+                    </Link>
                 </div>
                 <br></br>
             </div>

@@ -2,7 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { jugadores } from "@/app/dashboard/jugador/page";
-import JugadorCard from "@/components/Jugador"; // ✅ Usa el componente JugadorCard para mostrar detalles
+import JugadorCard from "@/components/Jugador";
 
 export default function VerJugador() {
   const params = useParams();
@@ -21,12 +21,9 @@ export default function VerJugador() {
     <JugadorCard
       nombre={jugador.nombre}
       imagen={jugador.imagen}
-      cantidadJugadores={jugador.datos[0]}
-      ubicacion={jugador.datos[1]}
-      fechaInicio="01/01/2025" // Datos estáticos de ejemplo
-      fechaFinalizacion="10/01/2025"
-      categoria="Masculino"
-      descripcion="a."
+      nacionalidad={jugador.nacionalidad || "No definida"}
+      fechaNacimiento={jugador.fechaNacimiento || "No definida"}
+      genero={jugador.genero || "No definido"}
       onEditar={() => console.log("Editar jugador", jugador.id)}
       onEliminar={() => console.log("Eliminar jugador", jugador.id)}
     />

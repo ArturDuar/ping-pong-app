@@ -1,7 +1,7 @@
 import Link from "next/link";
 import React from "react";
 
-const JugadorCard = ({ nombre, imagen, cantidadJugadores, ubicacion, fechaInicio, fechaFinalizacion, categoria, descripcion, onEditar, onEliminar }) => {
+const JugadorCard = ({ nombre, imagen, nacionalidad, fechaNacimiento, genero, descripcion, onEditar, onEliminar }) => {
     return (
       <div className="content">
         <h1 className="content-title">{nombre}</h1>
@@ -25,11 +25,9 @@ const JugadorCard = ({ nombre, imagen, cantidadJugadores, ubicacion, fechaInicio
           {/* Detalles del jugador */}
           <div style={{ flex: '1', color: 'var(--text-light)' }}>
             <h3 style={{ marginBottom: '15px' }}>Detalles del jugador</h3>
-            <p><strong>Cantidad de jugadores:</strong> {cantidadJugadores}</p>
-            <p><strong>Ubicación:</strong> {ubicacion}</p>
-            <p><strong>Fecha inicio:</strong> {fechaInicio}</p>
-            <p><strong>Fecha finalización:</strong> {fechaFinalizacion}</p>
-            <p><strong>Categoría:</strong> {categoria}</p>
+            <p><strong>Nacionalidad:</strong> {nacionalidad}</p>
+            <p><strong>Fecha de nacimiento:</strong> {fechaNacimiento}</p>
+            <p><strong>Género:</strong> {genero}</p>
             <p><strong>Descripción:</strong></p>
             <p style={{ fontSize: '14px', color: '#CCCCCC' }}>{descripcion}</p>
           </div>
@@ -39,4 +37,3 @@ const JugadorCard = ({ nombre, imagen, cantidadJugadores, ubicacion, fechaInicio
   };
   
   export default JugadorCard;
-  
