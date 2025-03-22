@@ -4,53 +4,41 @@ import '@/app/globals.css';
 
 const CrearJugador = () => {
     return (
-        <div className="content">
+        <div className="content my-5 border border-2 rounded container" style={{ backgroundColor: 'var(--card-bg)' }}>
             <h2 className="title">Crear nuevo jugador</h2>
-            <br></br>
-            <br></br>
-            <div className="form-container">
-                <div className="form-section">
+            <div className="row container row-cols-lg-2 row-gap-3">
+                <div>
                     <label className="section-label">Nombre Completo del jugador</label>
-                    <div className="form-row">
-                        <div className="form-group">
+                    <div className='row row-gap-3 mb-3'>
+                        <div className='form-group col-lg-6'>
                             <input type="text" id="primerNombre" placeholder="Primer Nombre" />
                         </div>
-                        <div className="form-group">
+                        <div className='form-group col-lg-6'>
                             <input type="text" id="segundoNombre" placeholder="Segundo Nombre" />
                         </div>
                     </div>
-                    <div className="form-row">
-                        <div className="form-group">
+                    <div className='row row-gap-3'>
+                        <div className="form-group col-lg-6">
                             <input type="text" id="primerApellido" placeholder="Primer Apellido" />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group col-lg-6">
                             <input type="text" id="segundoApellido" placeholder="Segundo Apellido" />
                         </div>
                     </div>
                 </div>
-
-                <div className="form-section2">
-                    <div className="form-group">
+                <div className="form-group">
                         <label htmlFor="lugar">Nacionalidad</label>
                         <input type="text" id="nacionalidades" placeholder="Ej. Salvadoreña" />
-                    </div>
-                    <br></br>
-                    <div className="form-group">
+                </div>
+                <div className="form-group">
                         <label htmlFor="fechanacimiento">Fecha de nacimiento</label>
                         <input type="text" id="fechanacimiento" placeholder="dd/mm/aa" />
-                    </div>
                 </div>
-
-                <div className="form-section1">
-                    <div className="form-group file-upload">
+                <div className="form-group file-upload">
                         <label htmlFor="foto">Fotografía del jugador</label>
-                        <input type="file" id="foto" />
-                        <span>Elije un archivo</span>
-                    </div>
-                    <div className='mensajefoto'>
-                        <span>Ningun archivo Seleccionado</span>
-                    </div>
+                        <input type="file" id="foto" className='form-control rounded-0 file-update-custom' />
                 </div>
+                
                 <div className="form-group">
                     <label htmlFor="genero">Genero</label>
                     <select id="generos">
@@ -59,8 +47,8 @@ const CrearJugador = () => {
                         <option value="femenino">Femenino</option>
                     </select>
                 </div>
-
-                <div className="button-group">
+            </div>
+            <div className="button-group">
                     <Link href="/dashboard/jugador">
                         <button className="button button-primary">Crear jugador</button>
                     </Link>
@@ -68,8 +56,6 @@ const CrearJugador = () => {
                         <button className="button button-secondary">Cancelar</button>
                     </Link>
                 </div>
-                <br></br>
-            </div>
         </div>
     );
 };

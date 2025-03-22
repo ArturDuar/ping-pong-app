@@ -49,7 +49,7 @@ const Jugadores = () => {
           ))}
         </div>
 
-        <div className="nuevo-jugador-card col-lg-4 order-0 order-lg-1 m-md-0 mb-3">
+        <div className="nuevo-jugador-card col-lg-4 order-0 order-lg-1 m-lg-0 mb-3">
           <p>¿Quieres ingresar un nuevo jugador?</p>
           <Link href="/dashboard/jugador/crear-jugador">
             <button className="nuevo-jugador-button">Crear nuevo jugador</button>

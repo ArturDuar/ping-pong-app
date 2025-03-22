@@ -9,7 +9,9 @@ export default function DashboardLayout({ children }) {
   return (
     <div>
         <Header/>
-        {children}
+        <div className="min-vh">
+            {children}
+        </div>
         <Footer/>
     </div>
   );

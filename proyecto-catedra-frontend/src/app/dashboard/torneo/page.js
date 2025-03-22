@@ -52,7 +52,7 @@ const Torneos = () => {
           ))}
         </div>
 
-        <div className="nuevo-jugador-card col-lg-4 order-0 order-lg-1 m-md-0 mb-3">
+        <div className="nuevo-jugador-card col-lg-4 order-0 order-lg-1 m-lg-0 mb-3">
           <p>¿Quieres crear un nuevo torneo?</p>
           <Link href="/dashboard/torneo/crear-torneo">
             <button className="nuevo-jugador-button">Crear nuevo torneo</button>
