@@ -2,17 +2,17 @@ import React from "react";
 
 const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion, categoria, descripcion, onEditar, onEliminar }) => {
   return (
-    <div className="content">
+    <div className="content container">
       <h1 className="content-title">{nombre}</h1>
       
-      <div className="card-container" style={{ maxWidth: '900px', background: 'var(--card-bg)', border: '2px solid var(--card-border)', borderRadius: '12px', padding: '20px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
+      <div className="card-container" style={{ minHeight: '100%',minWidth: '100%', background: 'var(--card-bg)', border: '2px solid var(--card-border)', borderRadius: '12px', padding: '20px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
         
         {/* Imagen del torneo */}
-        <div style={{ flex: '1', textAlign: 'center' }}>
-          <div style={{ backgroundColor: 'var(--primary)', width: '200px', height: '250px', borderRadius: '4px', margin: '0 auto' }}>
+        <div style={{ textAlign: 'center' , minHeight: '50%'}} className="col-lg-6 col-12 h-100">
+          <div style={{ backgroundColor: 'var(--primary)', width: '100%', borderRadius: '4px', margin: '0 auto'}} className="ratio ratio-1x1">
             <img
               src={imagen || "https://via.placeholder.com/200x250/8E2F6F/FFFFFF?text=Torneo"}
-              alt={nombre}
+              alt="/*Aqui debería ir los brackets o esquemas del torneo*/"
               style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '4px' }}
             />
           </div>

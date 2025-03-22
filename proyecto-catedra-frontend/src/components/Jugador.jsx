@@ -9,8 +9,8 @@ const JugadorCard = ({ nombre, imagen, nacionalidad, fechaNacimiento, genero, de
         <div className="card-container" style={{ maxWidth: '900px', background: 'var(--card-bg)', border: '2px solid var(--card-border)', borderRadius: '12px', padding: '20px', display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
           
           {/* Imagen del jugador */}
-          <div style={{ flex: '1', textAlign: 'center' }}>
-            <div style={{ backgroundColor: 'var(--primary)', width: '200px', height: '250px', borderRadius: '4px', margin: '0 auto' }}>
+          <div style={{ textAlign: 'center' }} className="col-12 col-md-6 h-100">
+            <div style={{ backgroundColor: 'var(--primary)', width: '100%', borderRadius: '4px', margin: '0 auto' }}>
               <img
                 src={imagen || "https://via.placeholder.com/200x250/8E2F6F/FFFFFF?text=Jugador"}
                 alt={nombre}
@@ -28,8 +28,6 @@ const JugadorCard = ({ nombre, imagen, nacionalidad, fechaNacimiento, genero, de
             <p><strong>Nacionalidad:</strong> {nacionalidad}</p>
             <p><strong>Fecha de nacimiento:</strong> {fechaNacimiento}</p>
             <p><strong>Género:</strong> {genero}</p>
-            <p><strong>Descripción:</strong></p>
-            <p style={{ fontSize: '14px', color: '#CCCCCC' }}>{descripcion}</p>
           </div>
         </div>
       </div>

@@ -1,52 +1,61 @@
-import Link from "next/link";
+"use client";
 
+import Link from "next/link";
+import TorneosCard from "@/components/TorneosCard";
+
+// Datos de ejemplo para torneos
 export const torneos = [
   {
     id: 1,
-    nombre: "Torneo Nacional",
-    ubicacion: "Estadio Nacional",
-    fechaInicio: "01/02/2025",
-    fechaFinalizacion: "10/02/2025",
-    categoria: "Masculino",
-    descripcion: "Un torneo de alto nivel con equipos nacionales.",
-    imagen: "/img/Torneos/Torneo1.png",
+    nombre: "Nombre del torneo",
+    cantidadJugadores: "x",
+    ubicacion: "Ubicación",
+    fechaInicio: "dd/mm/aa",
+    fechaFinalizacion: "dd/mm/aa",
   },
   {
     id: 2,
-    nombre: "Torneo Regional",
-    ubicacion: "Cancha Central",
-    fechaInicio: "15/03/2025",
-    fechaFinalizacion: "20/03/2025",
-    categoria: "Femenino",
-    descripcion: "Competencia regional con equipos locales.",
-    imagen: "/img/Torneos/Torneo2.png",
+    nombre: "Nombre del torneo",
+    cantidadJugadores: "x",
+    ubicacion: "Ubicación",
+    fechaInicio: "dd/mm/aa",
+    fechaFinalizacion: "dd/mm/aa",
   },
-  // ...otros torneos
+  {
+    id: 3,
+    nombre: "Nombre del torneo",
+    cantidadJugadores: "x",
+    ubicacion: "Ubicación",
+    fechaInicio: "dd/mm/aa",
+    fechaFinalizacion: "dd/mm/aa",
+  },
+  {
+    id: 4,
+    nombre: "Nombre del torneo",
+    cantidadJugadores: "x",
+    ubicacion: "Ubicación",
+    fechaInicio: "dd/mm/aa",
+    fechaFinalizacion: "dd/mm/aa",
+  },
 ];
+
 
 const Torneos = () => {
   return (
     <div className="content">
-      <h2 className="content-title">Torneos</h2>
+      <h2 className="content-title">Torneo</h2>
 
-      <div className="torneos-page row">
-        <div className="torneos-grid col-lg-8 order-1 order-lg-0">
-          {torneos.map((torneo) => (
-            <div key={torneo.id} className="torneo-card">
-              <img src={torneo.imagen} alt={torneo.nombre} className="torneo-imagen" />
-              <h3 className="torneo-nombre">{torneo.nombre}</h3>
-              <p className="torneo-ubicacion">{torneo.ubicacion}</p>
-              <Link href={`/dashboard/torneo/ver-torneo/${torneo.id}`}>
-                <button className="ver-mas-button">Ver más</button>
-              </Link>
-            </div>
+      <div className="jugadores-page row">
+        <div className="jugadores-grid col-lg-8 order-1 order-lg-0">
+          {torneos.map((torneo, index) => (
+            <TorneosCard torneo={torneo} key={index}></TorneosCard>
           ))}
         </div>
 
-        <div className="nuevo-torneo-card col-lg-4 order-0 order-lg-1 m-md-0 mb-3">
+        <div className="nuevo-jugador-card col-lg-4 order-0 order-lg-1 m-md-0 mb-3">
           <p>¿Quieres crear un nuevo torneo?</p>
           <Link href="/dashboard/torneo/crear-torneo">
-            <button className="nuevo-torneo-button">Crear nuevo torneo</button>
+            <button className="nuevo-jugador-button">Crear nuevo torneo</button>
           </Link>
         </div>
       </div>

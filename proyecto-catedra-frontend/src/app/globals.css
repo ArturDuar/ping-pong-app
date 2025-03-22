@@ -132,11 +132,10 @@ body {
   border: none;
   padding: 10px 5px;
   color: var(--text-light);
-  font-size: 14px;
+  font-size: 16px;
   margin-top: 10px;
   cursor: pointer;
   border-radius: 6px;
-  box-sizing: content-box;
   word-wrap: normal;
 }
 
@@ -526,20 +525,20 @@ input::placeholder {
 /* Estilos para la página de jugadores y torneo individual*/
 
 
-.jugadores-grid {
+.jugadores-grid, .torneos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
 @media screen and (max-width: 768px) {
-  .jugadores-grid {
+  .jugadores-grid, .torneos-grid {
     grid-template-columns: repeat(2, 1fr);
   }
   
 }
 
-.jugador-card {
+.jugador-card, .torneo-card {
   background: var(--card-bg);
   border: 2px solid var(--card-border);
   border-radius: 12px;
