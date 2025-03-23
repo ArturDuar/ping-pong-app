@@ -1,11 +1,19 @@
 "use client"; 
 
 import {OpcionCard as Card} from '@/components/OpcionCard';
+import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { FaUsers , FaTableTennis, FaChartBar} from 'react-icons/fa';
  
 
 export default function PaginaPrincipal(){
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        setUser(user);
+    }, []);
+
     return(
         <div className="home container row m-auto">
           <div className="row justify-content-center align-items-center m-auto g-5">
@@ -22,7 +30,7 @@ export default function PaginaPrincipal(){
                 </div>
               </div>
               <div>
-                <h1 className="content-title fw-bolder">Bienvenido a Ping Pong</h1>
+                <h1 className="content-title fw-bolder">Bienvenido, {user}</h1>
                 <p className="text-white">¿Que deseas hacer hoy?</p>
               </div>
             </div>

@@ -1,35 +1,78 @@
 "use client";
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import Image from 'next/image';
-import styles from './signup.module.css';
+import { useRouter } from 'next/navigation';
+import LoadingScreen from '@/components/LoadingScreen';
+import { register } from '@/service/RegisterService';
 
 export default function SignUp() {
-  const [formData, setFormData] = useState({
-    usuario: '',
-    email: '',
-    contrasena: '',
-    confirmarContrasena: ''
-  });
+    const [loading, setLoading] = useState(true);  
+    const router = useRouter();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);  
+    const [error, setError] = useState('');
+  
+    const [formData, setFormData] = useState({
+      name: '',
+      email: '',
+      password: '',
+      passwordConfirmation: ''
+    });
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
+    useEffect(() => {
+      // Verificamos la autenticación del usuario
+      const token = localStorage.getItem("token");
+      
+      if (token) {
+        router.push("/dashboard");
+      } else {
+        setIsAuthenticated(true);
+        setLoading(false);
+      }
+    }, [router]);
 
-  const handleSubmit = (e) => {
-    console.log('Sign up data:', formData);
-  };
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData(prev => ({
+        ...prev,
+        [name]: value
+      }));
+      console.log('Form Data:', formData);
+    };
+
+    const handleSubmit = async (e) => {
+        setError('');
+        e.preventDefault();
+        setIsLoading(true);  // Activar el estado de carga
+
+        try {
+
+          if(formData.password !== formData.passwordConfirmation){
+            setError('Las contraseñas no son iguales');
+            setIsLoading(false);
+
+            return;
+          }
+
+          const data = await register(formData.name, formData.email, formData.password);
+          console.log('Registro existoso:', data);
+          router.push('/dashboard');
+          setIsLoading(false);
+    
+        } catch (err) {
+          setError(err.message);
+          setIsLoading(false);
+        };
+      }
 
   return (
-    <div className="containerCard">
-      <main className="main">
-        <div className="signupWrapper">
-          <div className="formContainer">
+    <div>
+      {loading || !isAuthenticated ? (
+      <LoadingScreen/> 
+    ): (
+      <div className="min-vh-100 container d-flex justify-content-center align-items-center">
+          <div className="formContainer p-5">
             <div className="titleSection">
               <img 
                 src="/img/logos/logo_blanco.png" 
@@ -42,13 +85,14 @@ export default function SignUp() {
             
             <h2 className="crearCuenta">Crear cuenta</h2>
             
-            <form>
+            <form onSubmit={handleSubmit}>
               <div className="inputGroup">
                 <input
                   type="text"
                   placeholder="Usuario"
-                  name="usuario"
-                  className="input"
+                  name="name"
+                  className="inputStyle w-100"
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -58,7 +102,8 @@ export default function SignUp() {
                   type="email"
                   placeholder="Correo Electrónico"
                   name="email"
-                  className="input"
+                  className="inputStyle w-100"
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -67,8 +112,9 @@ export default function SignUp() {
                 <input
                   type="password"
                   placeholder="Contraseña"
-                  name="contrasena"
-                  className="input"
+                  name="password"
+                  className="inputStyle w-100"
+                  onChange={handleChange}
                   required
                 />
               </div>
@@ -77,27 +123,35 @@ export default function SignUp() {
                 <input
                   type="password"
                   placeholder="Confirmar contraseña"
-                  name="confirmarContrasena"
-                  className="input"
+                  name="passwordConfirmation"
+                  className="inputStyle w-100"
+                  onChange={handleChange}
                   required
                 />
               </div>
+
+              {error && <p style={{ color: 'red' }}>{error}</p>}
               
-              <button type="submit" className="submitButton">
-                Crear Cuenta
-              </button>
+              {isLoading ? (
+                <button type="submit" className="submitButton" disabled={isLoading}>
+                  Creando cuenta...
+                </button>
+              ) : (
+                <button type="submit" className="submitButton" disabled={isLoading}>
+                  Crear Cuenta
+                </button>
+              )}
             </form>
             
             <div className="loginLink">
               <span>¿Ya tienes cuenta?</span>
-              <a href="/" className="inicioSesion">
+              <Link href="/" className="inicioSesion">
                 Inicia sesión
-              </a>
+              </Link>
             </div>
           </div>
         </div>
-      </main>
+    )}
     </div>
-
   );
 }

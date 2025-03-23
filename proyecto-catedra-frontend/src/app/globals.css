@@ -276,17 +276,8 @@ input::placeholder {
 
 /*Estilos de login*/
 
-.containerCard {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  position: relative;
-}
 
 .loginCard {
-  display: flex;
   max-width: 800px;
   min-height: 450px;
   border-radius: 5px;
@@ -296,7 +287,6 @@ input::placeholder {
 }
 
 .loginForm {
-  flex: 1;
   padding: 30px !important;
   display: flex;
   flex-direction: column;
@@ -322,6 +312,7 @@ input::placeholder {
   padding: 12px 15px;
   margin-bottom: 15px;
   border-radius: 3px;
+  box-sizing: content-box;
 }
 
 .loginButton {
@@ -355,7 +346,6 @@ input::placeholder {
 }
 
 .logoSection {
-  flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -382,28 +372,7 @@ input::placeholder {
 
 /*Estilos de signup*/
 
-.main {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.signupWrapper {
-  display: flex;
-  width: 100%;
-  max-width: 500px;
-  justify-content: center;
-  align-items: center;
-}
-
 .formContainer {
-  width: 100%;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
   background-color: #0B0000;
   border-radius: 8px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
@@ -431,12 +400,10 @@ input::placeholder {
 }
 
 .inputGroup {
-  position: relative;
   margin-bottom: 1rem;
 }
 
-.input {
-  width: 100%;
+.inputStyle {
   padding: 12px;
   border: none;
   border-radius: 4px;
@@ -488,16 +455,6 @@ input::placeholder {
 }
 
 
-@media (max-width: 576px) {
-  .formContainer {
-    padding: 1.5rem;
-  }
-  
-  .logo {
-    width: 160px;
-    height: auto;
-  }
-}
 
 
 /* Estilos para la página de jugadores y torneo individual*/

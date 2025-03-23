@@ -1,32 +1,52 @@
-
+"use client"
 import Link from "next/link";
-import { useState } from "react";
-import { FaSignOutAlt, FaUser } from "react-icons/fa";
-import { Navbar, Nav, Container, NavDropdown, Dropdown} from "react-bootstrap";
+import { useEffect, useState } from "react";
+import { Navbar, Nav, Container,Dropdown} from "react-bootstrap";
 import Image from "next/image";
+import { logout } from "@/service/LoginService";
+import { useRouter } from "next/navigation";
 
 const Header = () => {
-    const [menuOpen, setMenuOpen] = useState(false);
-  
+    const [user, setUser] = useState(null);
+    const router = useRouter();
+
+    useEffect(() => {
+        const user = localStorage.getItem("user");
+        setUser(user);
+    }, []);
+
+    const handleLogout = async( e) => {
+        e.preventDefault();
+        await logout();
+        router.push("/");
+    }
+
+    const handleChangeScreen = async(e, link) => {
+        e.preventDefault();       
+        router.push(link);
+    }
+
     return (
         <div style={{height: "50px"}}>
-            <Navbar variant="dark" expand="lg" className="header" >
+            <Navbar variant="dark" expand="lg" className="header" collapseOnSelect>
                 <Container>
-                    <Navbar.Brand href="/dashboard">
-                        <Image 
-                        src="/img/logos/nombreSolo_blanco.png" 
-                        alt="Logo Ping Pong"
-                        width={200} 
-                        height={30}
-                        className="p-2 h-50"
-                        />
+                    <Navbar.Brand>
+                        <Link href="/dashboard">
+                            <Image 
+                            src="/img/logos/nombreSolo_blanco.png" 
+                            alt="Logo Ping Pong"
+                            width={200} 
+                            height={30}
+                            className="p-2 h-50"
+                            />
+                        </Link>
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls="basic-navbar-nav" />
                     <Navbar.Collapse id="basic-navbar-nav">
                         <Nav className="me-auto text-light">
-                            <Nav.Link href="/dashboard/jugador" className="text-white">Jugadores</Nav.Link>
-                            <Nav.Link href="/dashboard/torneo" className="text-white">Torneos</Nav.Link>
-                            <Nav.Link href="" className="text-white">Estadisticas</Nav.Link>
+                            <Nav.Link href="/dashboard/jugador" className="text-white" onClick={(e) => handleChangeScreen(e, '/dashboard/jugador')}>Jugadores</Nav.Link>
+                            <Nav.Link href="/dashboard/torneo" className="text-white" onClick={ (e) => handleChangeScreen(e, '/dashboard/torneo')}>Torneos</Nav.Link>
+                            <Nav.Link href="" className="text-white" >Estadisticas</Nav.Link>
                         </Nav>
                         <Nav className="">
                             <Dropdown align="end" className="custom-nav-dropdown p-0 border-0 w-100">
@@ -38,12 +58,12 @@ const Header = () => {
                                     height={30} 
                                     className="rounded-circle" 
                                     />
-                                    <span className="ms-2 text-white">Usuario</span>
+                                    <span className="ms-2 text-white">{user}</span>
                                 </Dropdown.Toggle>
 
                                 <Dropdown.Menu>
-                                    <Dropdown.Item href="/profile" className="text-white">Ver Perfil</Dropdown.Item>
-                                    <Dropdown.Item href="/logout" className="text-white">Cerrar sesión</Dropdown.Item>
+                                    <Dropdown.Item className="text-white">Ver Perfil</Dropdown.Item>
+                                    <Dropdown.Item className="text-white" onClick={handleLogout}>Cerrar sesión</Dropdown.Item>
                                 </Dropdown.Menu>
                             </Dropdown>
                         </Nav>
