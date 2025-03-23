@@ -1,33 +1,61 @@
 "use client";
 
 import { useParams } from "next/navigation";
-import { torneos } from "@/app/dashboard/torneo/page";
 import TorneoCard from "@/components/Torneo";
+import { useEffect, useState } from "react";
+import { getTorneobyId } from "@/service/TorneoService";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function VerTorneo() {
   const params = useParams();
-  const torneo = torneos.find((t) => t.id === Number(params.id)); // Busca el torneo por ID
+  const [torneo, setTorneo] = useState(null);
+  const [error, setError] = useState('');
 
-  if (!torneo) {
+  useEffect(() => {
+    const fetchTorneo = async () => {
+      try{
+        const response = await getTorneobyId(params.id);
+        console.log('Datos del torneo:', response.data);
+
+        console.log('Torneo obtenido:', response);
+        setTorneo(response.data);
+      } catch (error) {
+        setError(error.message);
+        console.log('Error al obtener el torneo:', error);
+      } 
+    };
+
+    fetchTorneo();
+  }, []);
+
+  
+  if (error) {
     return (
       <div className="content">
         <h2 className="content-title">Torneo no encontrado</h2>
+        <p>{error}</p>
         <p>No se encontró ningún torneo con el ID: {params.id}</p>
       </div>
     );
   }
 
   return (
-    <TorneoCard
-      nombre={torneo.nombre}
-      imagen={torneo.imagen}
-      ubicacion={torneo.ubicacion}
-      fechaInicio={torneo.fechaInicio}
-      fechaFinalizacion={torneo.fechaFinalizacion}
-      categoria={torneo.categoria}
-      descripcion={torneo.descripcion}
-      onEditar={() => console.log("Editar torneo", torneo.id)}
-      onEliminar={() => console.log("Eliminar torneo", torneo.id)}
-    />
-  );
+    <>
+        {torneo ? (
+            <TorneoCard 
+                nombre={torneo.nombre_torneo}
+                imagen={torneo.imagen}
+                ubicacion={torneo.lugar_evento}
+                fechaInicio={torneo.fecha_inicio}
+                fechaFinalizacion={torneo.fecha_fin}
+                categoria={torneo.categoria_genero}
+                descripcion={torneo.descripcion}
+                onEditar={() => console.log("Editar torneo", torneo.id)}
+                id={torneo.id}
+            />
+        ) : (
+            <LoadingScreen/>
+        )}
+    </>
+  )
 }

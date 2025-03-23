@@ -2,55 +2,44 @@
 
 import Link from "next/link";
 import TorneosCard from "@/components/TorneosCard";
-
-// Datos de ejemplo para torneos
-export const torneos = [
-  {
-    id: 1,
-    nombre: "Nombre del torneo",
-    cantidadJugadores: "x",
-    ubicacion: "Ubicación",
-    fechaInicio: "dd/mm/aa",
-    fechaFinalizacion: "dd/mm/aa",
-  },
-  {
-    id: 2,
-    nombre: "Nombre del torneo",
-    cantidadJugadores: "x",
-    ubicacion: "Ubicación",
-    fechaInicio: "dd/mm/aa",
-    fechaFinalizacion: "dd/mm/aa",
-  },
-  {
-    id: 3,
-    nombre: "Nombre del torneo",
-    cantidadJugadores: "x",
-    ubicacion: "Ubicación",
-    fechaInicio: "dd/mm/aa",
-    fechaFinalizacion: "dd/mm/aa",
-  },
-  {
-    id: 4,
-    nombre: "Nombre del torneo",
-    cantidadJugadores: "x",
-    ubicacion: "Ubicación",
-    fechaInicio: "dd/mm/aa",
-    fechaFinalizacion: "dd/mm/aa",
-  },
-];
+import { getTorneos } from "@/service/TorneoService";
+import { useEffect, useState } from "react";
+import LoadingScreen from "@/components/LoadingScreen";
 
 
 const Torneos = () => {
+  const [torneos, setTorneos] = useState(null); 
+  const [error, setError] = useState('');
+
+  useEffect(() => {
+    const fetchTorneos = async () => {
+      try{
+        const response = await getTorneos();
+
+        console.log('Torneos obtenidos:', response);
+        setTorneos(response);
+      } catch (error) {
+        console.log('Error al obtener los torneos:', error);
+      } 
+    };
+
+    fetchTorneos();
+  }, []);
+
   return (
     <div className="content">
       <h2 className="content-title">Torneo</h2>
 
       <div className="jugadores-page row">
-        <div className="jugadores-grid col-lg-8 order-1 order-lg-0">
-          {torneos.map((torneo, index) => (
-            <TorneosCard torneo={torneo} key={index}></TorneosCard>
-          ))}
-        </div>
+        {torneos ? 
+        ( <div className="jugadores-grid col-lg-8 order-1 order-lg-0">
+                    {torneos.map((torneo) => (
+                        <TorneosCard key={torneo.id} torneo={torneo}/>
+                    ))}
+          </div>
+            ) : (
+                <LoadingScreen/>
+            )}
 
         <div className="nuevo-jugador-card col-lg-4 order-0 order-lg-1 m-lg-0 mb-3">
           <p>¿Quieres crear un nuevo torneo?</p>

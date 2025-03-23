@@ -1,6 +1,26 @@
+"use client";
+
+import { deleteTorneo } from "@/service/TorneoService";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion, categoria, descripcion, onEditar, onEliminar }) => {
+const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion, categoria, descripcion, id, onEditar}) => {
+  
+  const router = useRouter();
+  const handleDelete = async (e) => {
+    try {
+      e.preventDefault();
+      if(confirm('¿Estás seguro de eliminar este torneo?')){
+        const response = await deleteTorneo(id);
+        console.log('Respuesta de eliminación:', response);
+        router.push('/dashboard/torneo');
+      }
+      console.log('Eliminación cancelada');
+    } catch (error) {
+      console.log('Error al eliminar el torneo:', error);
+    }
+  }
+  
   return (
     <div className="content container">
       <h1 className="content-title">{nombre}</h1>
@@ -18,7 +38,7 @@ const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion,
           </div>
 
           <button className="card-button" style={{ marginTop: '15px', width: '100%' }} onClick={onEditar}>Editar Torneo</button>
-          <button className="button button-secondary" style={{ marginTop: '10px', width: '100%' }} onClick={onEliminar}>Eliminar Torneo</button>
+          <button className="button button-secondary" style={{ marginTop: '10px', width: '100%' }} onClick={handleDelete}>Eliminar Torneo</button>
         </div>
 
         {/* Detalles del torneo */}
