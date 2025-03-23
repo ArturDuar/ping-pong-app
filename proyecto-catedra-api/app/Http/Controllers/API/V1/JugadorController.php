@@ -23,7 +23,12 @@ class JugadorController extends Controller
             ], 404);
         }
 
-        return JugadorResource::collection($jugador);
+        return response()->json([
+            'message' => 'Jugadores obtenidos',
+            'data' =>JugadorResource::collection($jugador),
+            'status' => '200'
+        ], status: 200);
+
     }
 
     public function store(Request $request){

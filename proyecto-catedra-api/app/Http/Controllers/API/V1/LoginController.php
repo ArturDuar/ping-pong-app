@@ -47,7 +47,8 @@ class LoginController extends Controller
                 'name' => $user->name,
                 'email' => $user->email
             ],
-            'token' => $user->createToken('token')->plainTextToken
+            'token' => $user->createToken('token')->plainTextToken,
+            'message' => 'Inicio de sesión correcto'
         ], 200);
     }
 

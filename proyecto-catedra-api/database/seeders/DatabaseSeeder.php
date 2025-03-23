@@ -23,14 +23,15 @@ class DatabaseSeeder extends Seeder
             'password' => '1234',
         ]);
 
-        User::factory(2)->create();
-        Jugador::factory(3)->create();
-        Torneo::factory(3)->create();
-
         DB::table('estados')->insert([
             ['nombre_estado' => 'Próximo'],
             ['nombre_estado' => 'En Curso'],
             ['nombre_estado' => 'Finalizado']
         ]);
+
+        User::factory(2)->create();
+        Jugador::factory(5)->create();
+        Torneo::factory(1)->create();
+
     }
 }

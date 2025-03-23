@@ -23,6 +23,10 @@ body {
   padding: 0;
 }
 
+.min-vh{
+  min-height: 80vh;
+}
+
 .header {
   box-shadow: var(--dropdown-bg) 0px 0px 10px;
   position: fixed !important;
@@ -37,6 +41,7 @@ body {
   font-size: 32px; 
   font-weight: bold;
   text-align: left; 
+  margin-bottom: 1em;
 }
 
 .nav {
@@ -77,6 +82,10 @@ body {
   color: var(--text-light);
 }
 
+.file-update-custom{
+  background-color: #4b4b4b !important;
+  color: #9c9c9c !important;
+}
 
 .dropdown-item {
   display: block;
@@ -98,16 +107,19 @@ body {
 
 .footer {
   text-align: center;
+  position: relative;
   padding: 15px;
   background: var(--primary);
   color: var(--text-light);
   margin-top: 20px;
+  z-index: 999;
+  bottom: 0;
 }
 
 .home {
   text-align: center;
   padding: 50px 0;
-  min-height: 100vh;
+  min-height: 85vh;
 }
 
 .home-title {
@@ -155,15 +167,6 @@ body {
   flex-direction: column;
   align-items: center;
   padding: 20px;
-}
-
-
-.form-container {
-  width: 80%;
-  max-width: 800px;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
 }
 
 .form-group {
@@ -248,12 +251,6 @@ textarea {
   gap: 10px;
 }
 
-.form-group {
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
 input, select {
   padding: 10px;
   border-radius: 4px;
@@ -266,25 +263,6 @@ input::placeholder {
   color: #9C9C9C; 
 }
 
-.file-upload {
-  display: flex;
-  align-items: center;
-}
-
-.file-upload input[type="file"] {
-  display: none;
-}
-
-.file-upload span {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  background-color: #4B4B4B;
-  color: #9C9C9C;
-  cursor: pointer;
-  flex: 1;
-  text-align: center;
-}
 
 .button-group {
   grid-column: 1 / 3;

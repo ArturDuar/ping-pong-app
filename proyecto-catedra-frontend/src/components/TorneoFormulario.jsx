@@ -25,9 +25,9 @@ const CrearTorneo = () => {
     };
 
     return (
-        <div className="content">
-            <h2 className="content-title">Crear nuevo torneo</h2>
-            <div className="form-container">
+        <div className="content my-5 border border-2 rounded" style={{ backgroundColor: 'var(--card-bg)' }}>
+            <h2 className="title">Crear nuevo torneo</h2>
+            <div className="row container row-cols-lg-2 row-gap-3">
                 <div className="form-group">
                     <label htmlFor="nombre">Nombre del torneo</label>
                     <input type="text" id="nombre" placeholder="Escribe el nombre del torneo" />
@@ -47,12 +47,6 @@ const CrearTorneo = () => {
                         <option value="3">Categoría 3</option>
                     </select>
                 </div>
-
-                <div className="form-group">
-                    <label htmlFor="descripcion">Descripción</label>
-                    <textarea id="descripcion" placeholder="Ej. Las reglas del torneo son..."></textarea>
-                </div>
-
                 <div className="form-group">
                     <label htmlFor="fecha-inicio">Fecha de inicio</label>
                     <input type="text" id="fecha-inicio" placeholder="dd/mm/aa" />
@@ -71,19 +65,22 @@ const CrearTorneo = () => {
                     <label htmlFor="fecha-fin">Fecha de finalización</label>
                     <input type="text" id="fecha-fin" placeholder="dd/mm/aa" />
                 </div>
-                <br></br>
-                <br></br>
-
-                <div className="button-group">
-                    <Link href="/dashboard/torneo">
-                        <button className="button button-primary">Crear Torneo</button>
-                    </Link>
-                    <Link href="/dashboard/torneo">
-                        <button className="button button-secondary">Cancelar</button>
-                    </Link>
+                <div className="form-group">
+                    <label htmlFor="descripcion">Descripción</label>
+                    <textarea id="descripcion" placeholder="Ej. Las reglas del torneo son..."></textarea>
                 </div>
                 <br></br>
             </div>
+            <div className='w-100'>
+                    <div className="button-group">
+                        <Link href="/dashboard/torneo">
+                            <button className="button button-primary">Crear Torneo</button>
+                        </Link>
+                        <Link href="/dashboard/torneo">
+                            <button className="button button-secondary">Cancelar</button>
+                        </Link>
+                    </div>
+                </div>
         </div>
     );
 };

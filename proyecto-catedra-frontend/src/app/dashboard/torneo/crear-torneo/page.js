@@ -2,5 +2,10 @@
 import TorneoFormulario from "@/components/TorneoFormulario";
 
 export default function CrearTorneoPage() {
-  return <TorneoFormulario />;
+  return (
+    <div className="container">
+      <TorneoFormulario />
+    </div>
+  )
+  
 }

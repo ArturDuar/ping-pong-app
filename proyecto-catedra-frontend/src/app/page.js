@@ -5,12 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import styles from './page.module.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const router = useRouter();
 
 
   const handleSubmit = (e) => {
