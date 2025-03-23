@@ -47,17 +47,10 @@ spec:
         app: proyecto-catedra-frontend
     spec:
       containers:
-<<<<<<< Updated upstream
         - name: proyecto-catedra-frontend
           image: proyecto-catedra-frontend:latest
           ports:
             - containerPort: 3000
-=======
-      - name: proyecto-catedra-frontend
-        image: proyecto-catedra-frontend:latest
-        ports:
-        - containerPort: 3000
->>>>>>> Stashed changes
 ---
 apiVersion: v1
 kind: Service

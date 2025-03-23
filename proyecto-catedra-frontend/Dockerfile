@@ -13,12 +13,9 @@ RUN npm install
 COPY . .
 
 # Copiar el script de entrypoint
-COPY entrypoint.sh /entrypoint.sh
-RUN chmod +x /entrypoint.sh
 
 # Exponer el puerto de Next.js
 EXPOSE 3000
 
 # Configurar el entrypoint y el comando por defecto
-ENTRYPOINT ["/entrypoint.sh"]
 CMD ["npm", "run", "dev"]
