@@ -20,6 +20,7 @@ class JugadorResource extends JsonResource
             'enlace_fotografia' => $this->enlace_fotografia,
             'genero' => $this->genero,
             'fecha_nacimiento' => $this->fecha_nacimiento,
+            'nacionalidad' => $this->nacionalidad,
             'usuario' => [
                 'id_usuario' => $this->id_usuario,
                 'name' => $this->usuario->name

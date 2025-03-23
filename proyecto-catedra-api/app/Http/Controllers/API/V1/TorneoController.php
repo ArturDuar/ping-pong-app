@@ -71,6 +71,7 @@ class TorneoController extends Controller
         }
 
         $data = [
+            'data'  => new TorneoResource($torneo),
             'message' => 'Torneo registrado correctamente',
             'status' => 201,
         ];

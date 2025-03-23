@@ -1,7 +1,8 @@
-export const getTorneos = async () => {
+
+export const getJugadores = async () => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/v1/torneo', {
+        const response = await fetch('http://localhost:8000/api/v1/jugador', {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -10,7 +11,7 @@ export const getTorneos = async () => {
         });
 
         const data = await response.json();
-        console.log('Datos de torneos:', data);
+        console.log('Datos de jugadores:', data);
 
         if (!response.ok) {
             console.log('Error en la respuesta:', data.message);
@@ -18,16 +19,16 @@ export const getTorneos = async () => {
         }
 
         return Array.isArray(data.data) ? data.data : [];
-    } catch (error) {
-        console.log('Error al obtener torneos:', error.message);
+    } catch (error) {  
+        console.log('Error al obtener jugadores:', error.message);
         return [];
     }
-};
+}
 
-export const getTorneobyId = async (id) => {
+export const getJugadorbyId = async (id) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:8000/api/v1/torneo/${id}`, {
+        const response = await fetch(`http://localhost:8000/api/v1/jugador/${id}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -36,7 +37,7 @@ export const getTorneobyId = async (id) => {
         });
 
         const data = await response.json();
-        console.log('Datos de torneo:', data);
+        console.log('Datos de jugador:', data);
 
         if (!response.ok) {
             console.log('Error en la respuesta:', data.message);
@@ -45,44 +46,20 @@ export const getTorneobyId = async (id) => {
 
         return data;
     } catch (error) {
-        console.log('Error al obtener torneo:', error.message);
+        console.log('Error al obtener jugador:', error.message);
         return [];
     }
-};
+}
 
-export const deleteTorneo = async (id) => {
+export const deleteJugador = async (id) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:8000/api/v1/torneo/${id}`, {
+        const response = await fetch(`http://localhost:8000/api/v1/jugador/${id}`, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             }
-        });
-
-        const data = await response.json();
-
-        if (!response.ok) {
-            throw new Error(data.message || 'Error desconocido');
-        }
-
-        return data;
-    } catch (error) {
-        throw new Error(error.message);
-    }
-}
-
-export const saveTorneo = async (nombre_torneo, descripcion, lugar_evento, fecha_inicio, fecha_fin, categoria_genero) => {
-    try {
-        const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:8000/api/v1/torneo', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`
-            },
-            body: JSON.stringify({ nombre_torneo, descripcion, lugar_evento, fecha_inicio, fecha_fin, categoria_genero })
         });
 
         const data = await response.json();
@@ -95,21 +72,21 @@ export const saveTorneo = async (nombre_torneo, descripcion, lugar_evento, fecha
 
         return data;
     } catch (error) {
-        console.log('Error al obtener torneo:', error.message);
+        console.log('Error al obtener jugador:', error.message);
         return [];
     }
 }
 
-export const updateTorneo = async (id, nombre_torneo, descripcion, lugar_evento, fecha_inicio, fecha_fin, categoria_genero) => {
+export const saveJugador = async (nombre_jugador, genero, enlace_fotografia, fecha_nacimiento, nacionalidad) => {
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch(`http://localhost:8000/api/v1/torneo/${id}`, {
-            method: 'PUT',
+        const response = await fetch('http://localhost:8000/api/v1/jugador', {
+            method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': `Bearer ${token}`
             },
-            body: JSON.stringify({ nombre_torneo, descripcion, lugar_evento, fecha_inicio, fecha_fin, categoria_genero })
+            body: JSON.stringify({ nombre_jugador, genero, enlace_fotografia, fecha_nacimiento, nacionalidad })
         });
 
         const data = await response.json();
@@ -122,7 +99,34 @@ export const updateTorneo = async (id, nombre_torneo, descripcion, lugar_evento,
 
         return data.data;
     } catch (error) {
-        console.log('Error al obtener torneo:', error.message);
+        console.log('Error al obtener jugador:', error.message);
+        return [];
+    }
+}
+
+export const updateJugador = async (id, nombre_jugador, genero, enlace_fotografia, fecha_nacimiento, nacionalidad) => {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await fetch(`http://localhost:8000/api/v1/jugador/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`
+            },
+            body: JSON.stringify({ nombre_jugador, genero, enlace_fotografia, fecha_nacimiento, nacionalidad })
+        });
+
+        const data = await response.json();
+        console.log('Datos:', data);
+
+        if (!response.ok) {
+            console.log('Error en la respuesta:', data.message);
+            return [];
+        }
+
+        return data.data;
+    } catch (error) {
+        console.log('Error al obtener jugador:', error.message);
         return [];
     }
 }

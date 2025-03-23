@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('jugadores', function (Blueprint $table) {
             $table->id();
             $table->string('nombre_jugador');
-            $table->string('enlace_fotografia');
+            $table->string('enlace_fotografia')->nullable(true);
             $table->string('genero');
             $table->date('fecha_nacimiento');
             $table->string('nacionalidad');

@@ -28,18 +28,19 @@ export default function DashboardLayout({ children }) {
 
   // Solo mostramos el contenido real si NO está cargando Y está autenticado
   return (
-    <div>
-      {isLoading || !isAuthenticated ? (
-        <LoadingScreen />
-      ) : (
-        <>
-          <Header/>
-          <div className="min-vh-100">
-            {children}
-          </div>
-          <Footer/>
-        </>
-      )}
-    </div>
+        <div>
+        {isLoading || !isAuthenticated ? (
+          <LoadingScreen />
+        ) : (
+          <>
+            <Header/>
+            <div className="min-vh-100">
+              {children}
+            </div>
+            <Footer/>
+          </>
+        )}
+        </div>
+
   );
 }

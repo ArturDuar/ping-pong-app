@@ -12,15 +12,17 @@ use Illuminate\Support\Facades\Validator;
 class JugadorController extends Controller
 {
     public function index(Request $request){
-        $jugador = Jugador::with('users')
+        $jugador = Jugador::with('usuario')
         ->where('id_usuario', Auth::user()->id)
         ->get();
 
         if($jugador->isEmpty()){
-            return response()->json([
+
+            $data = [
                 'message' => 'No hay jugadores registrados',
-                'status' => '404'
-            ], 404);
+                'status' => 404
+            ];
+            return response()->json($data, 404);
         }
 
         return response()->json([
@@ -35,7 +37,7 @@ class JugadorController extends Controller
         $validator = Validator::make($request->all(), [
             'nombre_jugador' => 'required',
             'genero' => 'required',
-            'enlace_fotografia' => 'required',
+            'enlace_fotografia' => 'nullable',
             'fecha_nacimiento' => 'required',
             'nacionalidad' => 'required',
         ]);
@@ -67,6 +69,7 @@ class JugadorController extends Controller
         }
 
         $data = [
+            'data'  => new JugadorResource($jugador),
             'message' => 'Jugador registrado correctamente',
             'status' => 201,
         ];
@@ -87,7 +90,11 @@ class JugadorController extends Controller
             ], 404);
         }
 
-        return new JugadorResource($jugador);
+        return response()->json([
+            'data'  => new JugadorResource($jugador),
+            'message' => 'Jugador obtenido exitosamente',
+            'status' => 200
+        ]);
     }
 
     public function update(Request $request, $id){
@@ -104,14 +111,14 @@ class JugadorController extends Controller
         $validatedData = Validator::make($request->all(),[
             'nombre_jugador' => 'required',
             'genero' => 'required',
-            'enlace_fotografia' => 'required',
+            'enlace_fotografia' => 'nullable',
             'fecha_nacimiento' => 'required',
             'nacionalidad' => 'required',
         ]);
 
         if($validatedData->fails()){
             return response()->json([
-                'message'=> 'El torneo no se pudo modificar',
+                'message'=> 'El jugador no se pudo modificar',
                 'status'=> 400,
                 'errors' => $validatedData->errors()
             ], 400);
@@ -121,11 +128,12 @@ class JugadorController extends Controller
         $jugador->enlace_fotografia = $request->enlace_fotografia;
         $jugador->genero = $request->genero;
         $jugador->fecha_nacimiento = $request->fecha_nacimiento;
+        $jugador->nacionalidad = $request->nacionalidad;
 
         $jugador->save();
 
         $data = [
-            'torneo' => $jugador,
+            'data' => new JugadorResource($jugador),
             'message'=> 'Jugador modificado correctamente',
             'status'=> 200
         ];

@@ -11,8 +11,7 @@ Route::prefix('/v1')->group(function () {
     // Autenticación
     Route::controller(LoginController::class)->group(function () {
         Route::post('/register', 'register'); // Registro de usuario
-        Route::post('/login', 'login');     // Inicio de sesión
-        Route::post('/logout', 'logout');     // Cierre de sesion
+        Route::post('/login', 'login');     // Inicio de sesión   // Cierre de sesion
     });
 
     // Rutas protegidas con autenticación

@@ -4,7 +4,7 @@ import { deleteTorneo } from "@/service/TorneoService";
 import { useRouter } from "next/navigation";
 import React from "react";
 
-const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion, categoria, descripcion, id, onEditar}) => {
+const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion, categoria, descripcion, id}) => {
   
   const router = useRouter();
   const handleDelete = async (e) => {
@@ -20,6 +20,11 @@ const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion,
       console.log('Error al eliminar el torneo:', error);
     }
   }
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    router.push(`/dashboard/torneo/editar-torneo/${id}`);
+  };
   
   return (
     <div className="content container">
@@ -37,7 +42,7 @@ const TorneoCard = ({ nombre, imagen, ubicacion, fechaInicio, fechaFinalizacion,
             />
           </div>
 
-          <button className="card-button" style={{ marginTop: '15px', width: '100%' }} onClick={onEditar}>Editar Torneo</button>
+          <button className="card-button" style={{ marginTop: '15px', width: '100%' }} onClick={handleEdit}>Editar Torneo</button>
           <button className="button button-secondary" style={{ marginTop: '10px', width: '100%' }} onClick={handleDelete}>Eliminar Torneo</button>
         </div>
 

@@ -3,12 +3,33 @@
 import { useParams } from "next/navigation";
 import { jugadores } from "@/app/dashboard/jugador/page";
 import JugadorCard from "@/components/Jugador";
+import { useState, useEffect } from "react";
+import { getJugadorbyId } from "@/service/JugadorService";
+import LoadingScreen from "@/components/LoadingScreen";
 
 export default function VerJugador() {
   const params = useParams();
-  const jugador = jugadores.find((j) => j.id === Number(params.id)); // Busca el jugador por ID
+  const [jugador, setJugador] = useState(null);
+  const [error, setError] = useState('');
 
-  if (!jugador) {
+  useEffect(() => {
+    const fetchJugador = async () => {
+      try{
+        const response = await getJugadorbyId(params.id);
+        console.log('Datos del jugador:', response.data);
+
+        console.log('Jugador obtenido:', response);
+        setJugador(response.data);
+      } catch (error) {
+        setError(error.message);
+        console.log('Error al obtener el jugador:', error);
+      } 
+    };
+
+    fetchJugador();
+  }, []);
+  
+  if (error) {
     return (
       <div className="content">
         <h2 className="content-title">Jugador no encontrado</h2>
@@ -18,14 +39,19 @@ export default function VerJugador() {
   }
 
   return (
-    <JugadorCard
-      nombre={jugador.nombre}
-      imagen={jugador.imagen}
-      nacionalidad={jugador.nacionalidad || "No definida"}
-      fechaNacimiento={jugador.fechaNacimiento || "No definida"}
-      genero={jugador.genero || "No definido"}
-      onEditar={() => console.log("Editar jugador", jugador.id)}
-      onEliminar={() => console.log("Eliminar jugador", jugador.id)}
-    />
+    <>
+        {jugador ? (
+            <JugadorCard 
+                nombre={jugador.nombre_jugador}
+                imagen={jugador.imagen}
+                nacionalidad={jugador.nacionalidad}
+                fecha_nacimiento={jugador.fecha_nacimiento}
+                genero={jugador.genero || "No definido"}
+                id={jugador.id}
+            />
+        ) : (
+            <LoadingScreen/>
+        )}
+    </>
   );
 }

@@ -1,8 +1,30 @@
-import Link from "next/link";
+import { deleteJugador } from "@/service/JugadorService";
+import { useRouter } from "next/navigation";
 import React from "react";
 
-const JugadorCard = ({ nombre, imagen, nacionalidad, fechaNacimiento, genero, descripcion, onEditar, onEliminar }) => {
-    return (
+const JugadorCard = ({ nombre, imagen, nacionalidad, fecha_nacimiento, genero, id }) => {
+  
+  const router = useRouter();
+  const handleDelete = async (e) => {
+    try {
+      e.preventDefault();
+      if(confirm('¿Estás seguro de eliminar este jugador?')){
+        const response = await deleteJugador(id);
+        console.log('Respuesta de eliminación:', response);
+        router.push('/dashboard/jugador');
+      }
+      console.log('Eliminación cancelada');
+    } catch (error) {
+      console.log('Error al eliminar el jugador:', error);
+    }
+  }
+
+  const handleEdit = async (e) => {
+    e.preventDefault();
+    router.push(`/dashboard/jugador/editar-jugador/${id}`);
+  };
+  
+  return (
       <div className="content">
         <h1 className="content-title">{nombre}</h1>
         
@@ -18,15 +40,15 @@ const JugadorCard = ({ nombre, imagen, nacionalidad, fechaNacimiento, genero, de
               />
             </div>
   
-            <button className="card-button" style={{ marginTop: '15px', width: '100%' }} onClick={onEditar}>Editar Jugador</button>
-            <button className="button button-secondary" style={{ marginTop: '10px', width: '100%' }} onClick={onEliminar}>Eliminar Jugador</button>
+            <button className="card-button" style={{ marginTop: '15px', width: '100%' }} onClick={handleEdit}>Editar Jugador</button>
+            <button className="button button-secondary" style={{ marginTop: '10px', width: '100%' }} onClick={handleDelete}>Eliminar Jugador</button>
           </div>
   
           {/* Detalles del jugador */}
           <div style={{ flex: '1', color: 'var(--text-light)' }}>
             <h3 style={{ marginBottom: '15px' }}>Detalles del jugador</h3>
             <p><strong>Nacionalidad:</strong> {nacionalidad}</p>
-            <p><strong>Fecha de nacimiento:</strong> {fechaNacimiento}</p>
+            <p><strong>Fecha de nacimiento:</strong> {fecha_nacimiento}</p>
             <p><strong>Género:</strong> {genero}</p>
           </div>
         </div>

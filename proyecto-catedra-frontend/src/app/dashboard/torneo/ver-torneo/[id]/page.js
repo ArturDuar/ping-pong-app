@@ -50,7 +50,6 @@ export default function VerTorneo() {
                 fechaFinalizacion={torneo.fecha_fin}
                 categoria={torneo.categoria_genero}
                 descripcion={torneo.descripcion}
-                onEditar={() => console.log("Editar torneo", torneo.id)}
                 id={torneo.id}
             />
         ) : (
