@@ -23,6 +23,7 @@ services:
     volumes:
       - ./proyecto-catedra-frontend:/app
 
+
 networks:
   appnet:
     driver: bridge
