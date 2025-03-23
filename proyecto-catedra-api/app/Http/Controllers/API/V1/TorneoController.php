@@ -23,7 +23,12 @@ class TorneoController extends Controller
             ];
             return response()->json($data, 404);
         }
-        return TorneoResource::collection($torneo);
+
+        return response()->json([
+            'message' => 'Torneos obtenidos',
+            'data' =>TorneoResource::collection($torneo),
+            'status' => '200'
+        ], status: 200);
     }
 
     public function store(Request $request){
@@ -87,7 +92,12 @@ class TorneoController extends Controller
             ];
             return response()->json($data, 404);
         }
-        return new TorneoResource($torneo);
+
+        return response()->json([
+            'message' => 'Torneos obtenido exitosamente',
+            'data' => new TorneoResource($torneo),
+            'status' => '200'
+        ], status: 200);
     }
 
     public function update(Request $request, $id){
@@ -129,7 +139,7 @@ class TorneoController extends Controller
         $torneo->save();
 
         $data = [
-            'torneo' => $torneo,
+            'data' => $torneo,
             'message'=> 'Torneo modificado correctamente',
             'status'=> 200
         ];

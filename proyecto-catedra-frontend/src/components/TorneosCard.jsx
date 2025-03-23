@@ -1,4 +1,3 @@
-import Link from "next/link"
 
 export default function TorneoCard({ torneo }) {
     return(
@@ -17,9 +16,9 @@ export default function TorneoCard({ torneo }) {
                             <p>{torneo.fechaFinalizacion}</p>
                         </div>
                     </div>
-                    <Link href={`/dashboard/torneo/ver-torneo/${torneo.id}`}>
+                    <a href={`/dashboard/torneo/ver-torneo/${torneo.id}`}>
                         <button className="ver-mas-button">Ver más</button>
-                    </Link>
+                    </a>
             </div>
     )
 }

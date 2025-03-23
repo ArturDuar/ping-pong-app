@@ -1,4 +1,3 @@
-import Link from "next/link"; // ✅ Importa Link de Next.js
 
 export default function JugadorCard({ jugador }) {
   if (!jugador || !jugador.imagen) {
@@ -12,9 +11,9 @@ export default function JugadorCard({ jugador }) {
       <p className="jugador-datos"><strong>Nacionalidad:</strong> {jugador.nacionalidad}</p>
       <p className="jugador-datos"><strong>Fecha de nacimiento:</strong> {jugador.fechaNacimiento}</p>
       <p className="jugador-datos"><strong>Género:</strong> {jugador.genero}</p>
-      <Link href={`/dashboard/jugador/ver-jugador/${jugador.id}`}>
+      <a href={`/dashboard/jugador/ver-jugador/${jugador.id}`}>
         <button className="ver-mas-button">Ver más</button>
-      </Link>
+      </a>
     </div>
   );
 }

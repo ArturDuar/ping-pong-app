@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\Validator;
 class JugadorController extends Controller
 {
     public function index(Request $request){
-        $jugador = Jugador::with('usuario')
-        ->where('id', Auth::id())
+        $jugador = Jugador::with('users')
+        ->where('id_usuario', Auth::user()->id)
         ->get();
 
-        if(empty($jugador)){
+        if($jugador->isEmpty()){
             return response()->json([
                 'message' => 'No hay jugadores registrados',
                 'status' => '404'
