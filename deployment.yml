@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proyecto-catedra-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: proyecto-catedra-api
+  template:
+    metadata:
+      labels:
+        app: proyecto-catedra-api
+    spec:
+      containers:
+      - name: proyecto-catedra-api
+        image: proyecto-catedra-api:latest
+        ports:
+        - containerPort: 8000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: proyecto-catedra-api-service
+spec:
+  selector:
+    app: proyecto-catedra-api
+  ports:
+    - protocol: TCP
+      port: 8000
+      targetPort: 8000
+  type: LoadBalancer
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: proyecto-catedra-frontend
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: proyecto-catedra-frontend
+  template:
+    metadata:
+      labels:
+        app: proyecto-catedra-frontend
+    spec:
+      containers:
+        - name: proyecto-catedra-frontend
+          image: proyecto-catedra-frontend:latest
+          ports:
+            - containerPort: 3000
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: proyecto-catedra-frontend-service
+spec:
+  selector:
+    app: proyecto-catedra-frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
+  type: LoadBalancer
