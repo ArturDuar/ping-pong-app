@@ -2,8 +2,8 @@
 
 
 
-
-
+- Roberto Arturo Duarte Mejía, DM240115
+- Eduardo Alfredo Ramirez Torres, RT240549
 - Salvador Enrique Delgado Peñate DP240093
 - Oscar Daniel Soto Jovel SJ241841
 
