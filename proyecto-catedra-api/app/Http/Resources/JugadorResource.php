@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -20,11 +21,8 @@ class JugadorResource extends JsonResource
             'enlace_fotografia' => $this->enlace_fotografia,
             'genero' => $this->genero,
             'fecha_nacimiento' => $this->fecha_nacimiento,
+            'edad' => Carbon::parse($this->fecha_nacimiento)->age,
             'nacionalidad' => $this->nacionalidad,
-            'usuario' => [
-                'id_usuario' => $this->id_usuario,
-                'name' => $this->usuario->name
-            ]
         ];
     }
 

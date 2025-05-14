@@ -19,9 +19,9 @@ class TorneoController extends Controller
         if($torneo->isEmpty()){
             $data = [
                 'message' => 'No hay torneos registrados',
-                'status' => 404
+                'status' => 200
             ];
-            return response()->json($data, 404);
+            return response()->json($data, 200);
         }
 
         return response()->json([

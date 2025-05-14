@@ -1,28 +1,9 @@
-import { deleteJugador } from "@/service/JugadorService";
-import { useRouter } from "next/navigation";
+
 import React from "react";
 
 const JugadorCard = ({ nombre, imagen, nacionalidad, fecha_nacimiento, genero, id }) => {
   
-  const router = useRouter();
-  const handleDelete = async (e) => {
-    try {
-      e.preventDefault();
-      if(confirm('¿Estás seguro de eliminar este jugador?')){
-        const response = await deleteJugador(id);
-        console.log('Respuesta de eliminación:', response);
-        router.push('/dashboard/jugador');
-      }
-      console.log('Eliminación cancelada');
-    } catch (error) {
-      console.log('Error al eliminar el jugador:', error);
-    }
-  }
 
-  const handleEdit = async (e) => {
-    e.preventDefault();
-    router.push(`/dashboard/jugador/editar-jugador/${id}`);
-  };
   
   return (
       <div className="content">
