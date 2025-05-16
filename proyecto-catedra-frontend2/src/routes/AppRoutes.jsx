@@ -12,6 +12,7 @@ import Torneos from "../pages/Torneo/Torneos";
 import TorneoDetalle from "../pages/Torneo/TorneoDetalle";
 import TorneoCrear from "../pages/Torneo/TorneoCrear";
 import TorneoEditar from "../pages/Torneo/TorneoEditar";
+import VerUser from "../pages/VerUser";
 
 const AppRoutes = () => {
   return (
@@ -101,6 +102,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute>
             <TorneoEditar/>
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/perfil"
+        element={
+          <PrivateRoute>
+            <VerUser />
           </PrivateRoute>
         }
       />

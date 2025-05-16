@@ -1,10 +1,11 @@
 import { Navbar, Nav, Container, Dropdown, Image, NavDropdown } from "react-bootstrap";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import * as LoginService from "../services/LoginService";
 
 const Header = () => {
     const [user, setUser] = useState("");
+    const navigate = useNavigate();
 
     useEffect(() => {
         setUser(localStorage.getItem("user"));
@@ -77,7 +78,12 @@ const Header = () => {
                             </Dropdown.Toggle>
 
                             <Dropdown.Menu>
-                                <Dropdown.Item className="text-white">Ver Perfil</Dropdown.Item>
+                                <Dropdown.Item
+                                    className="text-white"
+                                    onClick={() => navigate("/perfil")}
+                                >
+                                    Ver Perfil
+                                </Dropdown.Item>
                                 <Dropdown.Item className="text-white" onClick={handleLogout}>
                                     Cerrar sesión
                                 </Dropdown.Item>
