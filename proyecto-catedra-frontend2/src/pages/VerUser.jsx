@@ -20,17 +20,38 @@ const VerUser = () => {
   return (
     <Dashboard>
       <div className="container d-flex flex-column align-items-center justify-content-center" style={{ minHeight: "80vh" }}>
-        <div className="card card-bg p-5 shadow" style={{ maxWidth: 400, width: "100%" }}>
-          <div className="d-flex flex-column align-items-center mb-4">
+        <div
+          className="card shadow"
+          style={{
+            maxWidth: 370,
+            width: "100%",
+            background: "#180d0f",
+            borderRadius: 12,
+            border: "none",
+            marginBottom: 24,
+          }}
+        >
+          <div className="d-flex flex-column align-items-center mb-3 pt-4">
             <div
-              className="rounded-circle bg-secondary d-flex align-items-center justify-content-center mb-3"
-              style={{ width: 120, height: 120 }}
+              className="rounded-circle d-flex align-items-center justify-content-center mb-3"
+              style={{
+                width: 100,
+                height: 100,
+                background: "#222",
+                overflow: "hidden",
+              }}
             >
-              <img src="/img/icono.png" alt="Avatar" style={{ width: 80, height: 80 }} />
+              <img
+                src="/img/icono.png"
+                alt="Avatar"
+                style={{ width: 70, height: 70, objectFit: "cover" }}
+              />
             </div>
-            <h2 className="fw-bold text-white mb-3">Información</h2>
+            <h2 className="fw-bold text-white mb-3" style={{ fontSize: "2rem" }}>
+              Información
+            </h2>
           </div>
-          <div className="text-white text-center mb-4">
+          <div className="text-white text-center mb-4" style={{ fontSize: "1.1rem" }}>
             <div className="mb-2">
               <span className="fw-bold">Username:</span>
               <br />
@@ -47,11 +68,57 @@ const VerUser = () => {
               ********
             </div>
           </div>
-          <div className="d-flex flex-column flex-md-row gap-2 justify-content-center">
-            <button className="btn btn-light fw-bold" disabled>Editar perfil</button>
-            <button className="btn btn-primary fw-bold" onClick={logout}>Cerrar Sesión</button>
-            <button className="btn btn-secondary fw-bold" disabled>Eliminar cuenta</button>
-          </div>
+        </div>
+        {/* Botones fuera de la tarjeta */}
+        <div className="d-flex flex-row gap-3 justify-content-center mt-2">
+          <button
+            className="fw-bold"
+            style={{
+              background: "#e5e5e5",
+              color: "#222",
+              border: "none",
+              minWidth: 120,
+              fontSize: "1rem",
+              borderRadius: 8,
+              padding: "0.7rem 1.5rem",
+              fontWeight: 600,
+            }}
+            disabled
+          >
+            Editar perfil
+          </button>
+          <button
+            className="fw-bold"
+            style={{
+              background: "#B84F8C",
+              color: "#fff",
+              border: "none",
+              minWidth: 120,
+              fontSize: "1rem",
+              borderRadius: 8,
+              padding: "0.7rem 1.5rem",
+              fontWeight: 600,
+            }}
+            onClick={logout}
+          >
+            Cerrar Sesión
+          </button>
+          <button
+            className="fw-bold"
+            style={{
+              background: "#888",
+              color: "#fff",
+              border: "none",
+              minWidth: 120,
+              fontSize: "1rem",
+              borderRadius: 8,
+              padding: "0.7rem 1.5rem",
+              fontWeight: 600,
+            }}
+            disabled
+          >
+            Eliminar cuenta
+          </button>
         </div>
       </div>
     </Dashboard>
