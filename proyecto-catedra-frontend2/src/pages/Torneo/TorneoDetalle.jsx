@@ -1,7 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Dashboard from "../../layout/Dashboard";
 import { useEffect, useState } from "react";
-import { useTorneoContext } from "../../contexts/TorneoContext";
+import { useTorneoContext } from "../../hooks/useTorneoContext";
 
 const TorneoDetalle = () => {
   const navigate = useNavigate();
@@ -52,6 +52,12 @@ const TorneoDetalle = () => {
               <button className="btn btn-danger w-100" onClick={handleDelete}>
                 Eliminar Torneo
               </button>
+
+              <Link to={`/torneos/${torneo.id}/agregar-participantes`}>
+                <button className="btn btn-secondary w-100">
+                  Añadir jugadores al torneo
+                </button>
+              </Link>
             </div>
 
             {/* Detalles del torneo */}

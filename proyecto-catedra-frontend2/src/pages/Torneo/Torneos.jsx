@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Dashboard from "../../layout/Dashboard";
 import { useEffect } from "react";
-import { useTorneoContext } from "../../contexts/TorneoContext";
+import { useTorneoContext } from "../../hooks/useTorneoContext";
 
 const Torneos = () => {
   const { torneos, fetchTorneos } = useTorneoContext();

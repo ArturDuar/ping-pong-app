@@ -13,6 +13,7 @@ import TorneoDetalle from "../pages/Torneo/TorneoDetalle";
 import TorneoCrear from "../pages/Torneo/TorneoCrear";
 import TorneoEditar from "../pages/Torneo/TorneoEditar";
 import VerUser from "../pages/VerUser";
+import AgregarParticipantes from "../pages/Torneo/AgregarParticipantes";
 
 const AppRoutes = () => {
   return (
@@ -85,7 +86,7 @@ const AppRoutes = () => {
         path="/torneos/:id"
         element={
           <PrivateRoute>
-            <TorneoDetalle/>
+            <TorneoDetalle />
           </PrivateRoute>
         }
       />
@@ -93,7 +94,7 @@ const AppRoutes = () => {
         path="/torneos/crear-torneo"
         element={
           <PrivateRoute>
-            <TorneoCrear/>
+            <TorneoCrear />
           </PrivateRoute>
         }
       />
@@ -101,7 +102,15 @@ const AppRoutes = () => {
         path="torneos/editar-torneo/:id"
         element={
           <PrivateRoute>
-            <TorneoEditar/>
+            <TorneoEditar />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/torneos/:id/agregar-participantes"
+        element={
+          <PrivateRoute>
+            <AgregarParticipantes />
           </PrivateRoute>
         }
       />

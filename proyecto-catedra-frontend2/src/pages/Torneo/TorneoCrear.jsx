@@ -1,5 +1,5 @@
 import TorneosForm from "../../components/TorneosForm";
-import { useTorneoContext } from "../../contexts/TorneoContext";
+import { useTorneoContext } from "../../hooks/useTorneoContext";
 import Dashboard from "../../layout/Dashboard";
 
 const TorneoCrear = () => {
