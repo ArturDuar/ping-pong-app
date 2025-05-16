@@ -46,4 +46,8 @@ p{
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-  
+
+.bg-pink-header th {
+    background-color: #B84F8C !important;
+    color: #fff !important;
+}

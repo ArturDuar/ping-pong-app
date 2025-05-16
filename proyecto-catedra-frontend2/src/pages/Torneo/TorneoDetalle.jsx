@@ -45,19 +45,52 @@ const TorneoDetalle = () => {
           <div className="row gx-4 gy-4">
             {/* Controles de acción */}
             <div className="col-md-3 col-12 d-flex flex-column gap-3">
-              <Link to={`/torneos/editar-torneo/${torneo.id}`}>
-                <button className="btn btn-primary w-100">Editar Torneo</button>
-              </Link>
-              
-              <button className="btn btn-danger w-100" onClick={handleDelete}>
-                Eliminar Torneo
-              </button>
-
               <Link to={`/torneos/${torneo.id}/agregar-participantes`}>
-                <button className="btn btn-secondary w-100">
-                  Añadir jugadores al torneo
+                <button
+                  className="w-100 fw-bold"
+                  style={{
+                    background: "#B84F8C",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 10,
+                    padding: "0.8rem 0",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  Agregar participantes
                 </button>
               </Link>
+
+              <Link to={`/torneos/editar-torneo/${torneo.id}`}>
+                <button
+                  className="w-100 fw-bold"
+                  style={{
+                    background: "#fff",
+                    color: "#222",
+                    border: "none",
+                    borderRadius: 10,
+                    padding: "0.8rem 0",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  Editar Torneo
+                </button>
+              </Link>
+
+              <button
+                className="w-100 fw-bold"
+                style={{
+                  background: "#181818",
+                  color: "#fff",
+                  border: "none",
+                  borderRadius: 10,
+                  padding: "0.8rem 0",
+                  fontSize: "1.1rem",
+                }}
+                onClick={handleDelete}
+              >
+                Eliminar torneo
+              </button>
             </div>
 
             {/* Detalles del torneo */}
@@ -66,29 +99,40 @@ const TorneoDetalle = () => {
                 <h4>{torneo.nombre_torneo}</h4>
                 <table className="table">
                   <tbody>
-                    
                     <tr>
-                      <td><strong>Ubicación:</strong></td>
+                      <td>
+                        <strong>Ubicación:</strong>
+                      </td>
                       <td>{torneo.lugar_evento}</td>
                     </tr>
                     <tr>
-                      <td><strong>Fecha de inicio:</strong></td>
+                      <td>
+                        <strong>Fecha de inicio:</strong>
+                      </td>
                       <td>{torneo.fecha_inicio}</td>
                     </tr>
                     <tr>
-                      <td><strong>Fecha de fin:</strong></td>
+                      <td>
+                        <strong>Fecha de fin:</strong>
+                      </td>
                       <td>{torneo.fecha_fin}</td>
                     </tr>
                     <tr>
-                      <td><strong>Categoria:</strong></td>
+                      <td>
+                        <strong>Categoria:</strong>
+                      </td>
                       <td>{torneo.categoria_genero}</td>
                     </tr>
                     <tr>
-                        <td><strong>Estado:</strong></td>
-                        <td>{torneo.estado}</td>
+                      <td>
+                        <strong>Estado:</strong>
+                      </td>
+                      <td>{torneo.estado}</td>
                     </tr>
                     <tr>
-                      <td><strong>Descripción:</strong></td>
+                      <td>
+                        <strong>Descripción:</strong>
+                      </td>
                       <td>{torneo.descripcion}</td>
                     </tr>
                   </tbody>

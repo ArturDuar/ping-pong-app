@@ -84,12 +84,13 @@ const AgregarParticipantes = () => {
           {torneo ? torneo.nombre_torneo : "Nombre del torneo"}
         </h2>
 
-        <div className="d-flex align-items-end flex-wrap gap-2 mb-3">
+        {/* Fila única para select y botones */}
+        <div className="d-flex align-items-end flex-wrap gap-2 mb-4">
           <div className="flex-grow-1">
             <label className="form-label text-white mb-1">Elige un jugador</label>
             <select
               className="form-select border-0"
-              style={{ background: "#141414", color: "#fff", minWidth: 320 }}
+              style={{ background: "#141414", color: "#fff", minWidth: 220, height: 44 }}
               value={jugadorSeleccionado || ""}
               onChange={handleSelectChange}
             >
@@ -102,21 +103,50 @@ const AgregarParticipantes = () => {
             </select>
           </div>
           <button
-            className="btn btn-primary fw-bold"
+            className="fw-bold"
             type="button"
             onClick={handleAddJugador}
             disabled={jugadorSeleccionado === null}
-            style={{ background: "var(--primary)", border: "none", minWidth: 140, height: 48, fontSize: "1rem" }}
+            style={{
+              background: "var(--primary)",
+              color: "#fff",
+              border: "none",
+              minWidth: 140,
+              height: 44,
+              fontSize: "1rem",
+              borderRadius: 8,
+            }}
           >
             Añadir jugador
           </button>
-        </div>
-
-        <div className="d-flex gap-3 mb-4">
-          <button className="btn fw-bold" onClick={handleUpdate} style={{ background: "var(--primary)", color: "#fff", border: "none", minWidth: 160, height: 44, fontSize: "1rem" }}>
+          <button
+            className="fw-bold"
+            onClick={handleUpdate}
+            style={{
+              background: "var(--primary)",
+              color: "#fff",
+              border: "none",
+              minWidth: 160,
+              height: 44,
+              fontSize: "1rem",
+              borderRadius: 8,
+            }}
+          >
             Actualizar torneo
           </button>
-          <button className="btn btn-secondary fw-bold" onClick={handleCancelar} style={{ minWidth: 120, height: 44, fontSize: "1rem" }}>
+          <button
+            className="fw-bold"
+            onClick={handleCancelar}
+            style={{
+              background: "#555",
+              color: "#fff",
+              border: "none",
+              minWidth: 120,
+              height: 44,
+              fontSize: "1rem",
+              borderRadius: 8,
+            }}
+          >
             Cancelar
           </button>
         </div>

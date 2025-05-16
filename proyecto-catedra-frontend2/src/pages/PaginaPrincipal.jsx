@@ -2,7 +2,6 @@ import Dashboard from "../layout/Dashboard";
 import { FaTableTennis, FaUsers, FaChartBar } from "react-icons/fa";
 import { Image } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAuth } from "../contexts/AuthContext";
 import { useEffect, useState } from "react";
 
 const PaginaPrincipal = () => {
@@ -10,8 +9,8 @@ const PaginaPrincipal = () => {
 
   useEffect(() => {
     setUser(localStorage.getItem("user"));
-    console.log("user:", user);
-  }, []);
+    // console.log("user:", user); // Puedes quitar este log si no lo necesitas
+  }, []); // Solo al montar
 
   return (
     <Dashboard>
@@ -52,7 +51,7 @@ const PaginaPrincipal = () => {
               <div className="col-12 col-sm-6 col-lg-4">
                 <div className="card-bg text-center rounded shadow d-flex flex-column justify-content-between h-100">                                                             
                   <FaChartBar size="100" className="m-auto my-4"/>
-                  <Link className="card-button text-decoration-none btn btn-primary rounded-top-0 mt-2 p-3">
+                  <Link to="/estadisticas" className="card-button text-decoration-none btn btn-primary rounded-top-0 mt-2 p-3">
                     Ver Estadísticas
                   </Link>
                 </div>                      

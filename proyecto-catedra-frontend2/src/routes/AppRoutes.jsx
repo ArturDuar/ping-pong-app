@@ -14,6 +14,7 @@ import TorneoCrear from "../pages/Torneo/TorneoCrear";
 import TorneoEditar from "../pages/Torneo/TorneoEditar";
 import VerUser from "../pages/VerUser";
 import AgregarParticipantes from "../pages/Torneo/AgregarParticipantes";
+import VerEstadisticas from "../pages/Estadisticas/VerEstadisticas";
 
 const AppRoutes = () => {
   return (
@@ -119,6 +120,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute>
             <VerUser />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/estadisticas"
+        element={
+          <PrivateRoute>
+            <VerEstadisticas />
           </PrivateRoute>
         }
       />
