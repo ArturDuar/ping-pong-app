@@ -52,6 +52,62 @@ const mockData = [
     derrotas: 35,
     ranking: "Posición N° 7",
   },
+  {
+    numero: 8,
+    partidos: 70,
+    victorias: 38,
+    derrotas: 32,
+    ranking: "Posición N° 8",
+  },
+  {
+    numero: 18,
+    partidos: 68,
+    victorias: 36,
+    derrotas: 32,
+    ranking: "Posición N° 9",
+  },
+  {
+    numero: 21,
+    partidos: 65,
+    victorias: 33,
+    derrotas: 32,
+    ranking: "Posición N° 10",
+  },
+  {
+    numero: 9,
+    partidos: 60,
+    victorias: 30,
+    derrotas: 30,
+    ranking: "Posición N° 11",
+  },
+  {
+    numero: 13,
+    partidos: 58,
+    victorias: 28,
+    derrotas: 30,
+    ranking: "Posición N° 12",
+  },
+  {
+    numero: 17,
+    partidos: 55,
+    victorias: 25,
+    derrotas: 30,
+    ranking: "Posición N° 13",
+  },
+  {
+    numero: 20,
+    partidos: 52,
+    victorias: 22,
+    derrotas: 30,
+    ranking: "Posición N° 14",
+  },
+  {
+    numero: 23,
+    partidos: 50,
+    victorias: 20,
+    derrotas: 30,
+    ranking: "Posición N° 15",
+  },
 ];
 
 const VerEstadisticas = () => {
@@ -106,12 +162,6 @@ const VerEstadisticas = () => {
                   <td>{row.victorias} Partidos</td>
                   <td>{row.derrotas}</td>
                   <td>{row.ranking}</td>
-                </tr>
-              ))}
-              {/* Filas vacías para igualar la imagen */}
-              {[...Array(4)].map((_, idx) => (
-                <tr key={`empty-${idx}`}>
-                  <td colSpan={5}>&nbsp;</td>
                 </tr>
               ))}
             </tbody>
