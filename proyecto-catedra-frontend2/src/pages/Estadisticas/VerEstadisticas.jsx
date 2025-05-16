@@ -61,29 +61,31 @@ const VerEstadisticas = () => {
   return (
     <Dashboard>
       <div className="container py-5">
-        <h2 className="fw-bold mb-4" style={{ color: "#fff" }}>
-          Estadísticas generales
-        </h2>
-        <div className="mb-4" style={{ maxWidth: 400 }}>
-          <label className="form-label text-white" htmlFor="filtro">
-            Filtro
-          </label>
-          <select
-            id="filtro"
-            className="form-select"
-            style={{
-              background: "#222",
-              color: "#aaa",
-              border: "none",
-              fontWeight: "bold",
-              fontSize: "1.1rem",
-            }}
-            value={filtro}
-            onChange={(e) => setFiltro(e.target.value)}
-          >
-            <option value="">Selección de torneo</option>
-            <option value="ganadas">Selección de partidos ganados</option>
-          </select>
+        <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4">
+          <h2 className="fw-bold mb-3 mb-md-0 text-center w-100" style={{ color: "#fff" }}>
+            Estadísticas generales
+          </h2>
+          <div className="mb-0" style={{ minWidth: 320, maxWidth: 400 }}>
+            <label className="form-label text-white" htmlFor="filtro">
+              Filtro
+            </label>
+            <select
+              id="filtro"
+              className="form-select"
+              style={{
+                background: "#222",
+                color: "#aaa",
+                border: "none",
+                fontWeight: "bold",
+                fontSize: "1.1rem",
+              }}
+              value={filtro}
+              onChange={(e) => setFiltro(e.target.value)}
+            >
+              <option value="">Selección de torneo</option>
+              <option value="ganadas">Selección de partidos ganados</option>
+            </select>
+          </div>
         </div>
         <div className="table-responsive mb-4">
           <table className="table table-bordered" style={{ background: "#181818", color: "#fff" }}>
