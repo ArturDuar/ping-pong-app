@@ -15,6 +15,7 @@ import TorneoEditar from "../pages/Torneo/TorneoEditar";
 import VerUser from "../pages/VerUser";
 import AgregarParticipantes from "../pages/Torneo/AgregarParticipantes";
 import VerEstadisticas from "../pages/Estadisticas/VerEstadisticas";
+import IngresarResultados from "../pages/Torneo/IngresarResultados";
 
 const AppRoutes = () => {
   return (
@@ -112,6 +113,14 @@ const AppRoutes = () => {
         element={
           <PrivateRoute>
             <AgregarParticipantes />
+          </PrivateRoute>
+        }
+      />
+      <Route
+        path="/torneos/:id/ingresar-resultados"
+        element={
+          <PrivateRoute>
+            <IngresarResultados />
           </PrivateRoute>
         }
       />

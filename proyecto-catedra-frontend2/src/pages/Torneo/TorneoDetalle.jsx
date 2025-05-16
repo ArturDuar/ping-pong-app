@@ -61,6 +61,22 @@ const TorneoDetalle = () => {
                 </button>
               </Link>
 
+              <Link to={`/torneos/${torneo.id}/ingresar-resultados`}>
+                <button
+                  className="w-100 fw-bold"
+                  style={{
+                    background: "#B84F8C",
+                    color: "#fff",
+                    border: "none",
+                    borderRadius: 10,
+                    padding: "0.8rem 0",
+                    fontSize: "1.1rem",
+                  }}
+                >
+                  Ingresar resultados
+                </button>
+              </Link>
+
               <Link to={`/torneos/editar-torneo/${torneo.id}`}>
                 <button
                   className="w-100 fw-bold"
