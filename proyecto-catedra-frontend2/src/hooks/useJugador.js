@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { jugadorService } from '../services/JugadorService';
 
 export function useJugadores() {

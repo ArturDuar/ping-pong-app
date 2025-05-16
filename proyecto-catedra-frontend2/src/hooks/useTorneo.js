@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { torneoService } from '../services/TorneoService';
 
 export function useTorneos() {
