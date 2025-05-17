@@ -3,163 +3,127 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\JugadorResource;
+use App\Http\Resources\V1\JugadorResource;
 use App\Models\Jugador;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Str;
 
 class JugadorController extends Controller
 {
-    public function index(Request $request){
-        $jugador = Jugador::with('usuario')
-        ->where('id_usuario', Auth::user()->id)
-        ->get();
-
-        if($jugador->isEmpty()){
-
-            $data = [
-                'message' => 'No hay jugadores registrados',
-                'status' => 404
-            ];
-            return response()->json($data, 404);
-        }
-
-        return response()->json([
-            'message' => 'Jugadores obtenidos',
-            'data' =>JugadorResource::collection($jugador),
-            'status' => '200'
-        ], status: 200);
-
+    public function __construct()
+    {
+        $this->middleware('auth:sanctum')->except(['index', 'show']);
     }
 
-    public function store(Request $request){
+    public function index(Request $request)
+    {
+        $query = Jugador::with('usuario');
+
+        if ($request->has('genero')) {
+            $query->where('genero', $request->genero);
+        }
+
+        if ($request->has('usuario_id')) {
+            $query->where('id_usuario', $request->usuario_id);
+        }
+
+        if ($request->has('nombre')) {
+            $query->where('nombre_jugador', 'like', '%'.$request->nombre.'%');
+        }
+
+        $sortField = $request->input('sort', 'nombre_jugador');
+        $sortDirection = $request->input('direction', 'asc');
+        $query->orderBy($sortField, $sortDirection);
+
+        $jugadores = $query->paginate($request->per_page ?? 15);
+
+        return JugadorResource::collection($jugadores);
+    }
+
+
+    public function store(Request $request)
+    {
         $validator = Validator::make($request->all(), [
-            'nombre_jugador' => 'required',
-            'genero' => 'required',
-            'enlace_fotografia' => 'nullable',
-            'fecha_nacimiento' => 'required',
-            'nacionalidad' => 'required',
+            'nombre_jugador' => 'required|string|max:100',
+            'genero' => 'required|in:Masculino,Femenino,Otro',
+            'fotografia' => 'nullable|image|max:2048',
+            'fecha_nacimiento' => 'required|date',
+            'nacionalidad' => 'required|string|max:50',
+            'id_usuario' => 'required|exists:users,id'
         ]);
 
-        if($validator->fails()){
-            $data = [
-                'message' => 'Datos incorrectos',
-                'status' => 400,
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => 'Error de validación',
                 'errors' => $validator->errors()
-            ];
-            return response()->json($data, 400);
-        }
-        
-        $jugador = Jugador::create([
-            'nombre_jugador' => $request->nombre_jugador,
-            'genero' => $request->genero,
-            'enlace_fotografia' => $request->enlace_fotografia,
-            'fecha_nacimiento' => $request->fecha_nacimiento,
-            'nacionalidad' => $request->nacionalidad,
-            'id_usuario' => Auth::id(),
-        ]);
-
-        if(!$jugador){
-            $data = [
-                'message' => 'Error al registrar el jugador',
-                'status' => 500
-            ];
-            return response()->json($data, 500);
+            ], 422);
         }
 
-        $data = [
-            'data'  => new JugadorResource($jugador),
-            'message' => 'Jugador registrado correctamente',
-            'status' => 201,
-        ];
+        $data = $validator->validated();
 
-        return response()->json($data, 201);
+        // Procesar imagen si existe
+        if ($request->hasFile('fotografia')) {
+            $path = $request->file('fotografia')->store('jugadores', 'public');
+            $data['enlace_fotografia'] = $path;
+        }
+
+        $jugador = Jugador::create($data);
+
+        return new JugadorResource($jugador);
     }
 
-    public function show($id){
-        $jugador = Jugador::with('usuario')
-        ->where('id_usuario', Auth::id())
-        ->where('id', $id )
-        ->first();
 
-        if(empty($jugador)){
+    public function show(Jugador $jugador)
+    {
+        $jugador->load('usuario');
+        return new JugadorResource($jugador);
+    }
+
+
+    public function update(Request $request, Jugador $jugador)
+    {
+        $validator = Validator::make($request->all(), [
+            'nombre_jugador' => 'sometimes|string|max:100',
+            'genero' => 'sometimes|in:Masculino,Femenino,Otro',
+            'fotografia' => 'nullable|image|max:2048',
+            'fecha_nacimiento' => 'sometimes|date',
+            'nacionalidad' => 'sometimes|string|max:50',
+        ]);
+
+        if ($validator->fails()) {
             return response()->json([
-                'message' => 'No existe ese jugador',
-                'status' => '404'
-            ], 404);
+                'message' => 'Error de validación',
+                'errors' => $validator->errors()
+            ], 422);
         }
 
-        return response()->json([
-            'data'  => new JugadorResource($jugador),
-            'message' => 'Jugador obtenido exitosamente',
-            'status' => 200
-        ]);
+        $data = $validator->validated();
+
+        if ($request->hasFile('fotografia')) {
+            // Eliminar imagen anterior si existe
+            if ($jugador->enlace_fotografia) {
+                Storage::disk('public')->delete($jugador->enlace_fotografia);
+            }
+            
+            $path = $request->file('fotografia')->store('jugadores', 'public');
+            $data['enlace_fotografia'] = $path;
+        }
+
+        $jugador->update($data);
+
+        return new JugadorResource($jugador);
     }
 
-    public function update(Request $request, $id){
-        $jugador = Jugador::find($id);
-
-        if(!$jugador){
-            $data = [
-                'message'=> 'Este jugador no existe',
-                'status'=> 404
-            ];
-            return response()->json($data, 404);
-        }
-
-        $validatedData = Validator::make($request->all(),[
-            'nombre_jugador' => 'required',
-            'genero' => 'required',
-            'enlace_fotografia' => 'nullable',
-            'fecha_nacimiento' => 'required',
-            'nacionalidad' => 'required',
-        ]);
-
-        if($validatedData->fails()){
-            return response()->json([
-                'message'=> 'El jugador no se pudo modificar',
-                'status'=> 400,
-                'errors' => $validatedData->errors()
-            ], 400);
-        }
-
-        $jugador->nombre_jugador = $request->nombre_jugador;
-        $jugador->enlace_fotografia = $request->enlace_fotografia;
-        $jugador->genero = $request->genero;
-        $jugador->fecha_nacimiento = $request->fecha_nacimiento;
-        $jugador->nacionalidad = $request->nacionalidad;
-
-        $jugador->save();
-
-        $data = [
-            'data' => new JugadorResource($jugador),
-            'message'=> 'Jugador modificado correctamente',
-            'status'=> 200
-        ];
-
-        return response()->json($data,200);
-    }
-
-    public function destroy($id){
-        $jugador = Jugador::find($id);
-
-        if(!$jugador){
-            $data = [
-                'message' => 'Jugador no encontrado',
-                'status'=> 404
-            ];
-
-            return response()->json($data, 404);
+    public function destroy(Jugador $jugador)
+    {
+        if ($jugador->enlace_fotografia) {
+            Storage::disk('public')->delete($jugador->enlace_fotografia);
         }
 
         $jugador->delete();
 
-        $data = [
-            'message' => 'Jugador eliminado',
-            'status'=> 200
-        ];
-
-        return response()->json($data, 200);
+        return response()->json(null, 204);
     }
 }
