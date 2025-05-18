@@ -22,14 +22,7 @@ class TorneoResource extends JsonResource
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
             'categoria_genero' => $this->categoria_genero,
-            'estado' => [
-                'id_estado' => $this->id_estado,
-                'nombre' => $this->estado->nombre_estado,
-            ],
-            'usuario' => [
-                'id_usuario' => $this->id_usuario,
-                'name' => $this->usuario->name
-            ]
+            'estado' =>$this->estado->nombre_estado,
         ];
     }
 }

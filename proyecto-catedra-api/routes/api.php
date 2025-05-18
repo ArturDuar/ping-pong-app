@@ -11,15 +11,15 @@ Route::prefix('/v1')->group(function () {
     // Autenticación
     Route::controller(LoginController::class)->group(function () {
         Route::post('/register', 'register'); // Registro de usuario
-        Route::post('/login', 'login');     // Inicio de sesión   // Cierre de sesion
+        Route::post('/login', 'login'); // Inicio de sesión
+        Route::post('/logout', 'logout'); // Cierre de sesión
+        // Inicio de sesión   // Cierre de sesion
     });
 
     // Rutas protegidas con autenticación
     Route::middleware('auth:sanctum')->group(function () {
 
-        // Cerrar sesión
-        Route::post('/logout', [LoginController::class, 'logout']);
-
+        Route::get('/me', [LoginController::class, 'me']); // Obtener información del usuario autenticado
         // Rutas de Torneos
         Route::prefix('/torneo')->controller(TorneoController::class)->group(function () {
             Route::get('/', 'index');       // Obtener todos los torneos del usuario autenticado

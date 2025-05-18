@@ -1,0 +1,53 @@
+:root {
+    --primary: #B84F8C;
+    --secondary: #8E2F6F ;
+    --background: #1e1e1e;
+    --card-bg: #0B0000;
+    --hover: #3c0b2f;
+    --user-btn: #6A1C3A;
+    --dropdown-bg: #141414;
+    --dropdown-border: #404040;
+}
+
+.card-bg{
+    background-color: var(--card-bg) !important;
+
+}
+
+.btn{
+    border: none;
+}
+
+
+.btn-primary{
+    background-color: var(--primary);
+    color: #FFFFFF;
+}
+
+.btn-primary:hover, .btn-primary:active, .btn.show{
+    background-color: var(--hover) !important;
+}
+
+.input-text {
+    padding: 10px 20px;
+    border: none;
+}
+
+.navbar-color, .footer-color{
+    background-color: var(--secondary);
+}
+
+p{
+    margin: 0;
+}
+
+.truncado {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.bg-pink-header th {
+    background-color: #B84F8C !important;
+    color: #fff !important;
+}

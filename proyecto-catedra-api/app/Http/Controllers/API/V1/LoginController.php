@@ -9,6 +9,24 @@ use Illuminate\Support\Facades\Hash;
 
 class LoginController extends Controller
 {
+
+
+    public function me(Request $request)
+    {
+        if (!$request->user()) {
+            return response()->json([
+                'message' => 'No estás autenticado',
+                'status' => 401
+            ], 401);
+        }
+        return response()->json([
+            'user' => [
+                'name' => $request->user()->name,
+                'email' => $request->user()->email
+            ]
+        ]);
+    }
+
     public function register(Request $request){
         
         if(User::where('email', $request->email)->exists()){
