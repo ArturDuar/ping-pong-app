@@ -1,5 +1,5 @@
 // src/contexts/TorneoContext.jsx
-import React, { createContext } from 'react';
+import React, { createContext, useContext } from 'react';
 import { useTorneos } from '../hooks/useTorneo';
 
 const TorneoContext = createContext();
@@ -13,7 +13,8 @@ export const TorneoProvider = ({ children }) => {
     getById,
     createTorneo,
     updateTorneo,
-    deleteTorneo
+    deleteTorneo,
+    addJugadores
   } = useTorneos();
 
   return (
@@ -26,7 +27,8 @@ export const TorneoProvider = ({ children }) => {
         getById,
         createTorneo,
         updateTorneo,
-        deleteTorneo
+        deleteTorneo,
+        addJugadores
       }}
     >
       {children}
@@ -34,4 +36,4 @@ export const TorneoProvider = ({ children }) => {
   );
 };
 
-export { TorneoContext };
+export const useTorneoContext = () => useContext(TorneoContext);

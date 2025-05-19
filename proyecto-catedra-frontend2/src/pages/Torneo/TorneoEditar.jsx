@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { useTorneoContext } from "../../hooks/useTorneoContext";
+import { useTorneoContext } from "../../contexts/TorneoContext";
 import TorneosForm from "../../components/TorneosForm";
 import Dashboard from "../../layout/Dashboard";
 

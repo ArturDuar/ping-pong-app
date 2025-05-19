@@ -10,6 +10,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
     fecha_inicio: "",
     fecha_fin: "",
     categoria_genero: "",
+    num_participantes: 0,
   });
 
   useEffect(() => {
@@ -100,6 +101,17 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 <option value="Femenino">Femenino</option>
                 <option value="Mixto">Mixto</option>
               </select>
+            </div>
+            <div className="form-group d-flex flex-column gap-2">
+              <label htmlFor="categoria_genero">Número de participantes</label>
+              <input
+                type="number"
+                id="num_participantes"
+                name="num_participantes"
+                value={formData.num_participantes}
+                onChange={handleChange}
+                className="form-control border-0 text-white"
+              />
             </div>
           </div>
           <div className="form-group d-flex flex-column gap-2 px-3 text-start mt-3">

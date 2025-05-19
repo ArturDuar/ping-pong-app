@@ -26,6 +26,7 @@ export const torneoService = {
       lugar_evento: torneo.lugar_evento,
       fecha_inicio: torneo.fecha_inicio,
       fecha_fin: torneo.fecha_fin,
+      num_participantes: torneo.num_participantes,
       categoria_genero: torneo.categoria_genero,
     };
 
@@ -54,6 +55,7 @@ export const torneoService = {
       lugar_evento: torneo.lugar_evento,
       fecha_inicio: torneo.fecha_inicio,
       fecha_fin: torneo.fecha_fin,
+      num_participantes: torneo.num_participantes,
       categoria_genero: torneo.categoria_genero,
     };
 
@@ -83,5 +85,23 @@ export const torneoService = {
     const data = await res.json();
     if (!res.ok) throw new Error(data.message || 'Error al eliminar torneo');
     return data;
-  }
+  },
+
+  addJugadores: async (id, jugadores) => {
+    const body = {jugadores}
+
+    console.log('body:', body);
+    const res = await fetch(`${API_URL_TORNEO}/${id}/ingresar-jugadores`, {
+      method: 'POST',
+      headers: {...getAuthHeaders(), 'Content-Type': 'application/json'},
+      body: JSON.stringify(body)
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      console.log('Errores:', data.errors);
+      throw new Error(data.message || 'Error al agregar jugadores');
+    }
+
+  },
 };

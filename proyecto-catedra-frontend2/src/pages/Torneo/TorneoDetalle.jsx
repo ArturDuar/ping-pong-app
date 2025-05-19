@@ -1,7 +1,7 @@
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Dashboard from "../../layout/Dashboard";
 import { useEffect, useState } from "react";
-import { useTorneoContext } from "../../hooks/useTorneoContext";
+import { useTorneoContext } from "../../contexts/TorneoContext";
 
 const TorneoDetalle = () => {
   const navigate = useNavigate();
@@ -46,63 +46,25 @@ const TorneoDetalle = () => {
             {/* Controles de acción */}
             <div className="col-md-3 col-12 d-flex flex-column gap-3">
               <Link to={`/torneos/${torneo.id}/agregar-participantes`}>
-                <button
-                  className="w-100 fw-bold"
-                  style={{
-                    background: "#B84F8C",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 10,
-                    padding: "0.8rem 0",
-                    fontSize: "1.1rem",
-                  }}
-                >
+                <button className="w-100 btn btn-primary rounded ">
                   Agregar participantes
                 </button>
               </Link>
 
               <Link to={`/torneos/${torneo.id}/ingresar-resultados`}>
-                <button
-                  className="w-100 fw-bold"
-                  style={{
-                    background: "#B84F8C",
-                    color: "#fff",
-                    border: "none",
-                    borderRadius: 10,
-                    padding: "0.8rem 0",
-                    fontSize: "1.1rem",
-                  }}
-                >
+                <button className="w-100 btn btn-primary rounded ">
                   Ingresar resultados
                 </button>
               </Link>
 
               <Link to={`/torneos/editar-torneo/${torneo.id}`}>
-                <button
-                  className="w-100 fw-bold"
-                  style={{
-                    background: "#fff",
-                    color: "#222",
-                    border: "none",
-                    borderRadius: 10,
-                    padding: "0.8rem 0",
-                    fontSize: "1.1rem",
-                  }}
-                >
+                <button className="w-100 btn btn-secondary rounded ">
                   Editar Torneo
                 </button>
               </Link>
 
               <button
-                className="w-100 fw-bold"
-                style={{
-                  background: "#181818",
-                  color: "#fff",
-                  border: "none",
-                  borderRadius: 10,
-                  padding: "0.8rem 0",
-                  fontSize: "1.1rem",
-                }}
+                className="w-100 btn btn-danger rounded "
                 onClick={handleDelete}
               >
                 Eliminar torneo
@@ -147,9 +109,58 @@ const TorneoDetalle = () => {
                     </tr>
                     <tr>
                       <td>
+                        <strong>Número de participantes:</strong>
+                      </td>
+                      <td>{torneo.num_participantes}</td>
+                    </tr>
+                    <tr>
+                      <td>
                         <strong>Descripción:</strong>
                       </td>
                       <td>{torneo.descripcion}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                <table className="table">
+                  <tbody>
+                    <tr>
+                      <td>
+                        <strong>Jugadores</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td className="overflow-x-auto flex-nowrap" >
+                        <div className="d-flex flex-row">
+                          {" "}
+                          {/* Cambié flex-nowrap por flex-row */}
+                          {torneo.jugadores.map((jugador) => (
+                            <div
+                              key={jugador.id}
+                              className="position-relative bg-dark shadow cursor-pointer me-2"
+                              style={{
+                                width: "100px",
+                                minWidth: "100px",
+                              }}
+                              onClick={() =>
+                                navigate(`/jugadores/${jugador.id}`)
+                              }
+                            >
+                              <img
+                                src={
+                                  jugador.enlace_fotografia ||
+                                  "/img/avatar_femenino.png"
+                                }
+                                alt="Jugador"
+                                className="rounded w-100"
+                                style={{ height: "100px", objectFit: "cover" }}
+                              />
+                              <div className="text-center mt-2 text-white text-wrap">
+                                {jugador.nombre_jugador}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </td>
                     </tr>
                   </tbody>
                 </table>

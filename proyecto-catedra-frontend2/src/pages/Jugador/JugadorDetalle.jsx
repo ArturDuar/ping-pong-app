@@ -56,7 +56,7 @@ const JugadorDetalle = () => {
               </div>
 
               <Link to={`/jugadores/editar-jugador/${jugador.id}`}>
-                <button className="btn btn-primary w-100">Editar Jugador</button>
+                <button className="btn btn-secondary w-100">Editar Jugador</button>
               </Link>
               
               <button className="btn btn-danger w-100" onClick={handleDelete}>

@@ -1,6 +1,7 @@
 // src/context/AuthContext.js
 import React, { createContext, useContext, useState, useEffect } from 'react';
 import * as LoginService from '../services/LoginService';
+import * as RegisterService from '../services/RegisterService';
 
 const AuthContext = createContext();
 
@@ -17,7 +18,7 @@ export const AuthProvider = ({ children }) => {
           setUser(data.user);
           setIsAuth(true);
         } else {
-          logout(); // token inválidoe
+          logout(); // token inválido
         }
       }
       setLoading(false); // finaliza la carga
@@ -38,8 +39,15 @@ export const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
+  const register = async (name, email, password) => {
+    const data = await RegisterService.register(name, email, password);
+    setIsAuth(true);
+    setUser(data.user);
+
+  }
+
   return (
-    <AuthContext.Provider value={{ isAuth, user, login, logout, loading}}>
+    <AuthContext.Provider value={{ isAuth, user, login, logout, loading, register}}>
       {children}
     </AuthContext.Provider>
   );

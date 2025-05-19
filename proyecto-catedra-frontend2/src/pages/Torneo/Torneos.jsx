@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import Dashboard from "../../layout/Dashboard";
 import { useEffect } from "react";
-import { useTorneoContext } from "../../hooks/useTorneoContext";
+import { useTorneoContext } from "../../contexts/TorneoContext";
 
 const Torneos = () => {
   const { torneos, fetchTorneos } = useTorneoContext();
@@ -31,13 +31,13 @@ const Torneos = () => {
                   <div className="flex-grow-1">
                     <h5 className="mb-1">{torneo.nombre_torneo}</h5>
                     <div className="text-muted" style={{ fontSize: "0.9rem" }}>
-                      {torneo.lugar_evento} | {torneo.categoria_genero} | {torneo.estado}
+                      {torneo.lugar_evento} | {torneo.categoria_genero} |{" "}
+                      {torneo.estado}
                     </div>
                     <div className="text-muted" style={{ fontSize: "0.85rem" }}>
                       {new Date(torneo.fecha_inicio).toLocaleDateString()} -{" "}
                       {new Date(torneo.fecha_fin).toLocaleDateString()}
                     </div>
-                    <p className="mb-0 mt-2">{torneo.descripcion}</p>
                   </div>
                   <div className="text-md-end">
                     <Link

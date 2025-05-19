@@ -37,6 +37,10 @@ export function useTorneos() {
     await torneoService.delete(id);
   };
 
+  const addJugadores = async (id, jugadores) => {
+    await torneoService.addJugadores(id, jugadores);
+  };
+
   return {
     torneos,
     loading,
@@ -45,6 +49,7 @@ export function useTorneos() {
     getById,
     createTorneo,
     updateTorneo,
-    deleteTorneo
+    deleteTorneo,
+    addJugadores
   };
 }
