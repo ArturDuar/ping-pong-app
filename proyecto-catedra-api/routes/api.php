@@ -5,6 +5,7 @@ use App\Http\Controllers\API\V1\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\TorneoController;
+use App\Http\Controllers\API\V1\TorneoJugadorController;
 
 Route::prefix('/v1')->group(function () {
 
@@ -28,6 +29,8 @@ Route::prefix('/v1')->group(function () {
             Route::put('/{id}', 'update');  // Actualizar torneo
             Route::delete('/{id}', 'destroy'); // Eliminar torneo
         });
+
+        Route::post('/torneo/{id}/ingresar-jugadores', [TorneoJugadorController::class, 'store']);
         
         // Rutas de Jugadores
         Route::prefix('/jugador')->controller(JugadorController::class)->group(function () {

@@ -19,6 +19,7 @@ return new class extends Migration
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
             $table->string('categoria_genero');
+            $table->integer('num_participantes');
 
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
             $table->foreignId('id_estado')->constrained('estados')->onDelete('cascade')->default(1);

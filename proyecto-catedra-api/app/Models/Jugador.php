@@ -20,7 +20,13 @@ class Jugador extends Model
         'id_usuario'
     ];
 
-    function usuario(){
+    public function usuario(){
         return $this->belongsTo(User::class, 'id_usuario');
     }
+
+    public function torneos()
+{
+    return $this->belongsToMany(Torneo::class);
+}
+
 }

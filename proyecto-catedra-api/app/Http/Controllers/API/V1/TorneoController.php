@@ -12,7 +12,7 @@ class TorneoController extends Controller
 {
     public function index(Request $request){
         $user = Auth::user();
-        $torneo = Torneo::with('usuario', 'estado')
+        $torneo = Torneo::with('usuario', 'estado', 'jugadores')
         ->where('id_usuario', $user->id)
         ->get();
 
@@ -37,9 +37,11 @@ class TorneoController extends Controller
             'nombre_torneo' => 'required',
             'descripcion' => '',
             'lugar_evento' => 'required',
-            'fecha_inicio' => 'required',
-            'fecha_fin' => 'required',
+            'fecha_inicio' => 'required|date',
+            'fecha_fin' => 'required|date',
+            'num_participantes' => 'required|integer',
             'categoria_genero' => 'required'
+
         ]);
 
         if($validator->fails()){
@@ -58,6 +60,7 @@ class TorneoController extends Controller
             'fecha_inicio' => $request->fecha_inicio,
             'fecha_fin' => $request->fecha_fin,
             'categoria_genero' => $request->categoria_genero,
+            'num_participantes' => $request->num_participantes,
             'id_usuario' => Auth::id(),
             'id_estado' => 1
         ]);
@@ -119,6 +122,7 @@ class TorneoController extends Controller
             'lugar_evento' => 'nullable|string',
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date',
+            'num_participantes' => 'required|integer',
             'categoria_genero'=> 'string',
         ]);
 
@@ -135,6 +139,7 @@ class TorneoController extends Controller
         $torneo->lugar_evento = $request->lugar_evento;
         $torneo->fecha_inicio = $request->fecha_inicio;
         $torneo->fecha_fin = $request->fecha_fin;
+        $torneo->num_participantes = $request->num_participantes;
         $torneo->categoria_genero = $request->categoria_genero;
 
         $torneo->save();

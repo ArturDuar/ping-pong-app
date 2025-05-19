@@ -22,6 +22,8 @@ class TorneoResource extends JsonResource
             'fecha_inicio' => $this->fecha_inicio,
             'fecha_fin' => $this->fecha_fin,
             'categoria_genero' => $this->categoria_genero,
+            'num_participantes' => $this->num_participantes,
+            'jugadores' => JugadorResource::collection($this->jugadores),
             'estado' =>$this->estado->nombre_estado,
         ];
     }

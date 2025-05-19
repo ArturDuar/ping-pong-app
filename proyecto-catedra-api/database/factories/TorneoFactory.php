@@ -25,6 +25,7 @@ class TorneoFactory extends Factory
             'fecha_inicio' => $this->faker->date(), // Fecha de inicio
             'fecha_fin' => $this->faker->date(), // Fecha de fin
             'categoria_genero' => $this->faker->randomElement(['Masculino', 'Femenino', 'Mixto']), // Categoría de género aleatoria
+            'num_participantes' => 16, // Número de participantes aleatorio
             'id_usuario' => User::inRandomOrder()->first()->id, // Usuario aleatorio asociado
             'id_estado' => Estado::inRandomOrder()->first()->id, // Estado aleatorio asociado
         ];

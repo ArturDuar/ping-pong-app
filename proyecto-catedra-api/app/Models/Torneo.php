@@ -16,6 +16,7 @@ class Torneo extends Model
         'fecha_inicio',
         'fecha_fin',
         'categoria_genero',
+        'num_participantes',
         'id_usuario',
         'id_estado'
     ];
@@ -28,5 +29,10 @@ class Torneo extends Model
     public function estado()
     {
         return $this->belongsTo(Estado::class, 'id_estado');
+    }
+
+    public function jugadores()
+    {
+        return $this->belongsToMany(Jugador::class);
     }
 }
