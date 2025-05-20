@@ -11,10 +11,16 @@ class TorneoJugadorController extends Controller
 {
     public function store(Request $request, $torneoId)
     {
-        $torneo = Torneo::findOrFail($torneoId);
+        $torneo = Torneo::with('partidos')->findOrFail($torneoId);
+
+        if ($torneo->partidos->isNotEmpty()) {
+            return response()->json([
+                'error' => 'No se pueden añadir más jugadores. El torneo ya comenzó.'
+            ], 400);
+        }
 
         $validator = Validator::make($request->all(), [
-            'jugadores' => ['required', 'array'],
+            'jugadores' => ['array'],
             'jugadores.*' => 'exists:jugadores,id' // <- corregido aquí
         ]);
 

@@ -31,6 +31,18 @@ const TorneoDetalle = () => {
     }
   };
 
+  const handleIngresarResultados = () => {
+    if (confirm("¿Deseas comenzar este torneo?")) {
+      if (torneo.jugadores.length < torneo.num_participantes) {
+        alert(
+          "No se puede dar por comenzado el torneo, no hay suficientes jugadores para el torneo."
+        );
+        return;
+      }
+      navigate(`/torneos/${torneo.id}/ingresar-resultados`);
+    }
+  };
+
   return (
     <Dashboard>
       <div className="container">
@@ -51,9 +63,9 @@ const TorneoDetalle = () => {
                 </button>
               </Link>
 
-              <Link to={`/torneos/${torneo.id}/ingresar-resultados`}>
-                <button className="w-100 btn btn-primary rounded ">
-                  Ingresar resultados
+              <Link to={`/torneos/${torneo.id}/partidos`}>
+                <button className="w-100 btn btn-success rounded ">
+                  Ver Partidos
                 </button>
               </Link>
 
@@ -121,47 +133,66 @@ const TorneoDetalle = () => {
                     </tr>
                   </tbody>
                 </table>
-                <table className="table">
+                <table className="table w-100">
                   <tbody>
                     <tr>
                       <td>
                         <strong>Jugadores</strong>
                       </td>
                     </tr>
-                    <tr>
-                      <td className="overflow-x-auto flex-nowrap" >
-                        <div className="d-flex flex-row">
-                          {" "}
-                          {/* Cambié flex-nowrap por flex-row */}
-                          {torneo.jugadores.map((jugador) => (
-                            <div
-                              key={jugador.id}
-                              className="position-relative bg-dark shadow cursor-pointer me-2"
-                              style={{
-                                width: "100px",
-                                minWidth: "100px",
-                              }}
-                              onClick={() =>
-                                navigate(`/jugadores/${jugador.id}`)
-                              }
-                            >
-                              <img
-                                src={
-                                  jugador.enlace_fotografia ||
-                                  "/img/avatar_femenino.png"
+                    {torneo.jugadores.length === 0 ? (
+                      <tr>
+                        <td className="text-center">
+                          <div className="text-white">
+                            No hay jugadores añadidos.
+                          </div>
+                        </td>
+                      </tr>
+                    ) : (
+                      <tr>
+                        <td>
+                          {/* Contenedor con scroll horizontal */}
+                          <div
+                            className="d-flex overflow-auto"
+                            style={{
+                              whiteSpace: "nowrap",
+                              width: "100%",
+                            }}
+                          >
+                            {torneo.jugadores.map((jugador) => (
+                              <div
+                                key={jugador.id}
+                                className="position-relative bg-dark shadow cursor-pointer me-2 text-center text-white"
+                                style={{
+                                  width: "100px",
+                                  minWidth: "100px",
+                                  flex: "0 0 auto",
+                                }}
+                                onClick={() =>
+                                  navigate(`/jugadores/${jugador.id}`)
                                 }
-                                alt="Jugador"
-                                className="rounded w-100"
-                                style={{ height: "100px", objectFit: "cover" }}
-                              />
-                              <div className="text-center mt-2 text-white text-wrap">
-                                {jugador.nombre_jugador}
+                              >
+                                <img
+                                  src={
+                                    jugador.enlace_fotografia ||
+                                    "/img/avatar_femenino.png"
+                                  }
+                                  alt="Jugador"
+                                  className="rounded w-100"
+                                  style={{
+                                    height: "100px",
+                                    objectFit: "cover",
+                                  }}
+                                />
+                                <div className="mt-2 text-wrap">
+                                  {jugador.nombre_jugador}
+                                </div>
                               </div>
-                            </div>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

@@ -15,7 +15,8 @@ import TorneoEditar from "../pages/Torneo/TorneoEditar";
 import VerUser from "../pages/VerUser";
 import AgregarParticipantes from "../pages/Torneo/AgregarParticipantes";
 import VerEstadisticas from "../pages/Estadisticas/VerEstadisticas";
-import IngresarResultados from "../pages/Torneo/IngresarResultados";
+import Series from "../pages/Torneo/Series";
+import Partidos from "../pages/Torneo/Partidos";
 
 const AppRoutes = () => {
   return (
@@ -117,13 +118,21 @@ const AppRoutes = () => {
         }
       />
       <Route
-        path="/torneos/:id/ingresar-resultados"
+        path="/torneos/:id/partidos"
         element={
           <PrivateRoute>
-            <IngresarResultados />
+            <Partidos/>
           </PrivateRoute>
         }
       />
+      <Route 
+        path="/torneos/partidos/:id/series"
+        element={
+          <PrivateRoute>
+            <Series/>
+          </PrivateRoute>
+        }
+        />
       <Route
         path="/perfil"
         element={

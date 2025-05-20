@@ -3,6 +3,7 @@ import { useJugadorContext } from "../../contexts/JugadorContext";
 import { useTorneoContext } from "../../contexts/TorneoContext";
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import Select from "react-select";
 
 const AgregarParticipantes = () => {
   const { jugadores, fetchJugadores } = useJugadorContext();
@@ -13,12 +14,10 @@ const AgregarParticipantes = () => {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // Cargar jugadores una sola vez
   useEffect(() => {
     fetchJugadores();
   }, []);
 
-  // Cargar torneo una sola vez y extraer jugadores ya relacionados
   useEffect(() => {
     const fetchTorneo = async () => {
       if (id) {
@@ -33,12 +32,10 @@ const AgregarParticipantes = () => {
     fetchTorneo();
   }, [id, getById]);
 
-  // Convierte los IDs de participantes a objetos jugador
   const participantesObj = participantes
     .map((pid) => jugadores.find((j) => j.id === pid))
     .filter(Boolean);
 
-  // Jugadores aún no añadidos
   const jugadoresDisponibles = jugadores.filter(
     (j) =>
       !participantes.includes(j.id) &&
@@ -46,9 +43,13 @@ const AgregarParticipantes = () => {
       j.genero === torneo.categoria_genero
   );
 
-  const handleSelectChange = (e) => {
-    const value = e.target.value;
-    setJugadorSeleccionado(value ? parseInt(value, 10) : null);
+  const opcionesJugadores = jugadoresDisponibles.map((jugador) => ({
+    value: jugador.id,
+    label: jugador.nombre_jugador,
+  }));
+
+  const handleSelectChange = (selectedOption) => {
+    setJugadorSeleccionado(selectedOption ? selectedOption.value : null);
   };
 
   const handleAddJugador = () => {
@@ -67,21 +68,21 @@ const AgregarParticipantes = () => {
 
   const handleUpdate = async () => {
     if (!torneo) return;
-    if (participantes.length === 0) {
-      alert("Debes añadir al menos un jugador.");
-      return;
-    }
+
     const numMax = torneo.num_participantes;
     const actual = participantes.length;
 
-    /* if (actual < numMax) {
+    // Puedes descomentar esta parte si quieres forzar la cantidad exacta:
+    /*
+    if (actual < numMax) {
       alert(`Debes añadir al menos ${numMax} jugadores.`);
       return;
     }
     if (actual > numMax) {
       alert(`No puedes añadir más de ${numMax} jugadores.`);
       return;
-    } */
+    }
+    */
 
     try {
       await addJugadores(torneo.id, participantes);
@@ -95,6 +96,9 @@ const AgregarParticipantes = () => {
     navigate(`/torneos/${torneo?.id || ""}`);
   };
 
+  if(!torneo)
+    return <p className="text-center mt-5">Torneo no disponible</p>;
+
   return (
     <Dashboard>
       <div className="container py-4">
@@ -104,37 +108,45 @@ const AgregarParticipantes = () => {
         >
           {torneo ? torneo.nombre_torneo : "Nombre del torneo"}
         </h2>
-
+          {torneo.estado !== "Próximo" && <p className="text-danger mb-3">Ya no puede agregar más jugadores.</p>}
         {/* Fila única para select y botones */}
         <div className="d-flex align-items-end flex-wrap gap-2 mb-4">
+          
           <div className="flex-grow-1">
             <label className="form-label text-white mb-1">
               Elige un jugador
             </label>
-            <select
-              className="form-select border-0"
-              style={{
-                background: "#141414",
-                color: "#fff",
-                minWidth: 220,
-                height: 44,
-              }}
-              value={jugadorSeleccionado || ""}
+            <Select
+              theme={(theme) => ({
+                ...theme,
+                colors: {
+                  ...theme.colors,
+                  primary25: "#444", // opción resaltada
+                  primary: "#141414", // color del borde al enfocar
+                  neutral0: "#222", // fondo del input
+                  neutral80: "#fff", // texto
+                  neutral20: "#666", // borde
+                  neutral30: "#aaa", // borde al hover
+                },
+              })}
+              options={opcionesJugadores}
+              placeholder="Selecciona un jugador..."
+              value={
+                opcionesJugadores.find(
+                  (opt) => opt.value === jugadorSeleccionado
+                ) || null
+              }
               onChange={handleSelectChange}
-            >
-              <option value="">Selecciona un jugador...</option>
-              {jugadoresDisponibles.map((jugador) => (
-                <option key={jugador.id} value={jugador.id}>
-                  {jugador.nombre_jugador}
-                </option>
-              ))}
-            </select>
+              isClearable
+            />
           </div>
           <button
             className="btn btn-primary"
             type="button"
             onClick={handleAddJugador}
-            disabled={jugadorSeleccionado === null}
+            disabled={
+              jugadorSeleccionado === null || torneo.estado !== "Próximo"
+            }
             style={{
               background: "var(--primary)",
               color: "#fff",
@@ -150,6 +162,7 @@ const AgregarParticipantes = () => {
           <button
             className="btn btn-primary"
             onClick={handleUpdate}
+            disabled={torneo.estado !== "Próximo"}
             style={{
               background: "var(--primary)",
               color: "#fff",
@@ -216,7 +229,7 @@ const AgregarParticipantes = () => {
                     color: "#e74c3c",
                     fontWeight: "bold",
                     fontSize: 22,
-                    zIndex: 2,
+                    zIndex: 0,
                   }}
                 >
                   ×

@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\API\V1\EstadisticaJugadorController;
 use App\Http\Controllers\API\V1\JugadorController;
 use App\Http\Controllers\API\V1\LoginController;
+use App\Http\Controllers\API\V1\PartidoController;
+use App\Http\Controllers\API\V1\SerieController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\TorneoController;
@@ -30,15 +33,26 @@ Route::prefix('/v1')->group(function () {
             Route::delete('/{id}', 'destroy'); // Eliminar torneo
         });
 
-        Route::post('/torneo/{id}/ingresar-jugadores', [TorneoJugadorController::class, 'store']);
+        Route::post('/torneo/{id}/ingresar-jugadores', [TorneoJugadorController::class, 'store']); //Ingresar jugadores a un torneo
+        Route::post('/torneo/{id}/partidos', [PartidoController::class, 'generarPartidos']); //Generar partidos de un torneo
+        Route::get('/torneo/{id}/partidos', [PartidoController::class, 'index']); //listar todos los partidos de un torneo
+        Route::get('/torneo/partidos/{id}', [PartidoController::class, 'show']); //listar un partido
+        Route::post('/torneo/{id}/partidos/siguiente-ronda', [PartidoController::class, 'generarSiguienteRonda']); //crear ronda siguiente.
         
-        // Rutas de Jugadores
+        Route::prefix('/torneo/partidos')->controller(SerieController::class)->group(function () {
+            Route::get('/{id}/series', 'index'); //listar todas las series de un partido
+            Route::post('/{id}/series', 'syncSeries');  //modificar una serie de un partido
+        });
+
         Route::prefix('/jugador')->controller(JugadorController::class)->group(function () {
             Route::get('/', 'index');       // Obtener todos los jugadores
             Route::post('/', 'store');      // Crear un jugador
             Route::get('/{id}', 'show');    // Ver detalles de un jugador
             Route::put('/{id}', 'update');  // Actualizar jugador
             Route::delete('/{id}', 'destroy'); // Eliminar jugador
+
         });
+
+        Route::get('/estadisticas', [EstadisticaJugadorController::class, 'index']);
     });
 });

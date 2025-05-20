@@ -39,6 +39,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
         <h2 className="title text-center mb-4">
           {tipo === "crear" ? "Crear nuevo torneo" : "Editar torneo"}
         </h2>
+        {torneoInicial && torneoInicial.estado !== "Próximo" && <p className="text-danger mb-3">Ya no puedes editar este torneo.</p>}
         <form onSubmit={handleSubmit}>
           <div className="row row-cols-lg-2 row-gap-3 text-start px-3">
             <div className="form-group d-flex flex-column gap-2">
@@ -51,6 +52,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 onChange={handleChange}
                 placeholder="Ej. Copa Nacional"
                 className="form-control border-0 text-white"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -63,6 +65,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 onChange={handleChange}
                 placeholder="Ej. Estadio Nacional"
                 className="form-control border-0 text-white"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -74,6 +77,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 value={formData.fecha_inicio}
                 onChange={handleChange}
                 className="form-control border-0 text-white"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -85,6 +89,8 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 value={formData.fecha_fin}
                 onChange={handleChange}
                 className="form-control border-0 text-white"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -95,6 +101,8 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 value={formData.categoria_genero}
                 onChange={handleChange}
                 className="form-control border-0 text-white form-select"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
+                required
               >
                 <option value="">Seleccione una categoría</option>
                 <option value="Masculino">Masculino</option>
@@ -103,15 +111,24 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
               </select>
             </div>
             <div className="form-group d-flex flex-column gap-2">
-              <label htmlFor="categoria_genero">Número de participantes</label>
-              <input
-                type="number"
+              <label htmlFor="num_participantes">Número de participantes</label>
+              <select
                 id="num_participantes"
                 name="num_participantes"
                 value={formData.num_participantes}
                 onChange={handleChange}
-                className="form-control border-0 text-white"
-              />
+                className="form-select border-0 text-white"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
+                required
+              >
+                <option value="">Selecciona una cantidad de participantes</option>
+                <option value="2">2</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                <option value="16">16</option>
+                <option value="32">32</option>
+                <option value="64">64</option>
+              </select>
             </div>
           </div>
           <div className="form-group d-flex flex-column gap-2 px-3 text-start mt-3">
@@ -123,13 +140,14 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 onChange={handleChange}
                 placeholder="Detalles del torneo..."
                 className="form-control border-0 text-white"
+                disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
               ></textarea>
             </div>
           <div className="button-group d-flex justify-content-center gap-3 mt-4 flex-column flex-md-row px-3">
-            <button type="submit" className="btn btn-primary border-0">
+            <button type="submit" className="btn btn-primary border-0" disabled={torneoInicial && torneoInicial.estado !== "Próximo"}>
               {tipo === "crear" ? "Crear torneo" : "Editar torneo"}
             </button>
-            <button type="reset" className="btn btn-secondary">
+            <button type="reset" className="btn btn-secondary" disabled={torneoInicial && torneoInicial.estado !== "Próximo"}>
               Limpiar
             </button>
             <Link

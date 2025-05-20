@@ -4,19 +4,22 @@ namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\TorneoResource;
+use App\Models\Partido;
 use Illuminate\Http\Request;
 use App\Models\Torneo;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 class TorneoController extends Controller
 {
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $user = Auth::user();
         $torneo = Torneo::with('usuario', 'estado', 'jugadores')
-        ->where('id_usuario', $user->id)
-        ->get();
+            ->where('id_usuario', $user->id)
+            ->get();
 
-        if($torneo->isEmpty()){
+        if ($torneo->isEmpty()) {
             $data = [
                 'message' => 'No hay torneos registrados',
                 'status' => 200
@@ -26,12 +29,13 @@ class TorneoController extends Controller
 
         return response()->json([
             'message' => 'Torneos obtenidos',
-            'data' =>TorneoResource::collection($torneo),
+            'data' => TorneoResource::collection($torneo),
             'status' => '200'
         ], status: 200);
     }
 
-    public function store(Request $request){
+    public function store(Request $request)
+    {
 
         $validator = Validator::make($request->all(), [
             'nombre_torneo' => 'required',
@@ -44,7 +48,7 @@ class TorneoController extends Controller
 
         ]);
 
-        if($validator->fails()){
+        if ($validator->fails()) {
             $data = [
                 'message' => 'Datos incorrectos',
                 'status' => 400,
@@ -52,7 +56,7 @@ class TorneoController extends Controller
             ];
             return response()->json($data, 400);
         }
-        
+
         $torneo = Torneo::create([
             'nombre_torneo' => $request->nombre_torneo,
             'descripcion' => $request->descripcion,
@@ -65,7 +69,7 @@ class TorneoController extends Controller
             'id_estado' => 1
         ]);
 
-        if(!$torneo){
+        if (!$torneo) {
             $data = [
                 'message' => 'Error al registrar el torneo',
                 'status' => 500
@@ -74,7 +78,7 @@ class TorneoController extends Controller
         }
 
         $data = [
-            'data'  => new TorneoResource($torneo),
+            'data' => new TorneoResource($torneo),
             'message' => 'Torneo registrado correctamente',
             'status' => 201,
         ];
@@ -82,14 +86,15 @@ class TorneoController extends Controller
         return response()->json($data, 201);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $user = Auth::user();
         $torneo = Torneo::with('usuario', 'estado')
-        ->where('id_usuario', $user->id)
-        ->where('id', $id)
-        ->first();
+            ->where('id_usuario', $user->id)
+            ->where('id', $id)
+            ->first();
 
-        if(!$torneo){
+        if (!$torneo) {
             $data = [
                 'message' => 'Torneo no encontrado',
                 'status' => 404
@@ -104,32 +109,33 @@ class TorneoController extends Controller
         ], status: 200);
     }
 
-    public function update(Request $request, $id){
+    public function update(Request $request, $id)
+    {
 
         $torneo = Torneo::find($id);
 
-        if(!$torneo){
+        if (!$torneo) {
             $data = [
-                'message'=> 'Este torneo no existe',
-                'status'=> 404
+                'message' => 'Este torneo no existe',
+                'status' => 404
             ];
             return response()->json($data, 404);
         }
 
-        $validatedData = Validator::make($request->all(),[
+        $validatedData = Validator::make($request->all(), [
             'nombre_torneo' => 'required|string|max:255',
             'descripcion' => 'nullable|string',
             'lugar_evento' => 'nullable|string',
             'fecha_inicio' => 'required|date',
             'fecha_fin' => 'required|date',
             'num_participantes' => 'required|integer',
-            'categoria_genero'=> 'string',
+            'categoria_genero' => 'string',
         ]);
 
-        if($validatedData->fails()){
+        if ($validatedData->fails()) {
             return response()->json([
-                'message'=> 'El torneo no se pudo modificar',
-                'status'=> 400,
+                'message' => 'El torneo no se pudo modificar',
+                'status' => 400,
                 'errors' => $validatedData->errors()
             ], 400);
         }
@@ -146,20 +152,21 @@ class TorneoController extends Controller
 
         $data = [
             'data' => $torneo,
-            'message'=> 'Torneo modificado correctamente',
-            'status'=> 200
+            'message' => 'Torneo modificado correctamente',
+            'status' => 200
         ];
 
-        return response()->json($data,200);
-    } 
+        return response()->json($data, 200);
+    }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $torneo = Torneo::find($id);
 
-        if(!$torneo){
+        if (!$torneo) {
             $data = [
                 'message' => 'Torneo no encontrado',
-                'status'=> 404
+                'status' => 404
             ];
 
             return response()->json($data, 404);
@@ -169,9 +176,11 @@ class TorneoController extends Controller
 
         $data = [
             'message' => 'Torneo eliminado',
-            'status'=> 200
+            'status' => 200
         ];
 
         return response()->json($data, 200);
     }
+
+
 }

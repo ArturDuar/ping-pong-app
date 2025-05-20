@@ -62,31 +62,10 @@ const VerUser = () => {
               <br />
               {user.email}
             </div>
-            <div className="mb-2">
-              <span className="fw-bold">Contraseña:</span>
-              <br />
-              ********
-            </div>
           </div>
         </div>
         {/* Botones fuera de la tarjeta */}
         <div className="d-flex flex-row gap-3 justify-content-center mt-2">
-          <button
-            className="fw-bold"
-            style={{
-              background: "#e5e5e5",
-              color: "#222",
-              border: "none",
-              minWidth: 120,
-              fontSize: "1rem",
-              borderRadius: 8,
-              padding: "0.7rem 1.5rem",
-              fontWeight: 600,
-            }}
-            disabled
-          >
-            Editar perfil
-          </button>
           <button
             className="fw-bold"
             style={{
@@ -103,22 +82,7 @@ const VerUser = () => {
           >
             Cerrar Sesión
           </button>
-          <button
-            className="fw-bold"
-            style={{
-              background: "#888",
-              color: "#fff",
-              border: "none",
-              minWidth: 120,
-              fontSize: "1rem",
-              borderRadius: 8,
-              padding: "0.7rem 1.5rem",
-              fontWeight: 600,
-            }}
-            disabled
-          >
-            Eliminar cuenta
-          </button>
+
         </div>
       </div>
     </Dashboard>

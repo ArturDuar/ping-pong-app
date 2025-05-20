@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('categoria_genero');
             $table->integer('num_participantes');
 
+            $table->foreignId('id_ganador')->nullable()->constrained('jugadores')->onDelete('cascade');
             $table->foreignId('id_usuario')->constrained('users')->onDelete('cascade');
             $table->foreignId('id_estado')->constrained('estados')->onDelete('cascade')->default(1);
 

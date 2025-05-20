@@ -18,7 +18,8 @@ class Torneo extends Model
         'categoria_genero',
         'num_participantes',
         'id_usuario',
-        'id_estado'
+        'id_estado',
+        'id_ganador'
     ];
 
     public function usuario()
@@ -34,5 +35,13 @@ class Torneo extends Model
     public function jugadores()
     {
         return $this->belongsToMany(Jugador::class);
+    }
+
+    public function partidos(){
+        return $this->hasMany(Partido::class);
+    }
+
+    public function ganador(){
+        return $this->belongsTo(Jugador::class, 'id_ganador');
     }
 }
