@@ -28,6 +28,8 @@ Desarrollo de Aplic. Web con Soft. Interpret. en el Servidor DSS404 G03T
 
 [Enlace a figma](https://www.figma.com/design/yzLNNozxwdzOOodtyO7p4n/ProyectoCatedraDSSMockUps?node-id=0-1&t=9uwFhqwI2v0alzXE-1)
 
+# Capturas de pantalla
+
 ## Login y Sign Up
 
 | Login | Sign Up |
@@ -35,7 +37,7 @@ Desarrollo de Aplic. Web con Soft. Interpret. en el Servidor DSS404 G03T
 | <img src="./proyecto-catedra-frontend2/public/img/Capturas/Login.png" width="400"/> | <img src="./proyecto-catedra-frontend2/public/img/Capturas/SignUp.png" width="400"/> |
 
 ## Pagina Principal
-  <img src="./proyecto-catedra-frontend2/public/img/Capturas/Principal.png" width="400"/>
+  <img src="./proyecto-catedra-frontend2/public/img/Capturas/PaginaPrincipal.png" width="400"/>
   
 ## Ver perfil de administrador
 <img src="./proyecto-catedra-frontend2/public/img/Capturas/VerPerfil.png" width="400"/>
