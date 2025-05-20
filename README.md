@@ -33,3 +33,17 @@ Desarrollo de Aplic. Web con Soft. Interpret. en el Servidor DSS404 G03T
 
 
 
+#1-Login
+#2-Sign Up
+#3-Pagina Principal
+#4-Ver perfil de administrador
+#5-Ver torneos
+#6-Crear Torneos
+#7-Torneo individual
+#8-añadir jugadores al torneo
+#9-Ver partidos
+#10-Ingresar resultados
+#11-Ver jugadores 
+#12-Ingresar participantes
+#13-jugador individual
+#14-Ver Estadisticas
