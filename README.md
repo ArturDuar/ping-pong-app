@@ -2,6 +2,8 @@
 
 Aplicacion de ping pong
 
+<img src="./proyecto-catedra-frontend2/public/img/Capturas/Logo.png">
+
 
 # Colaboradores
 
@@ -26,24 +28,44 @@ Desarrollo de Aplic. Web con Soft. Interpret. en el Servidor DSS404 G03T
 
 [Enlace a figma](https://www.figma.com/design/yzLNNozxwdzOOodtyO7p4n/ProyectoCatedraDSSMockUps?node-id=0-1&t=9uwFhqwI2v0alzXE-1)
 
-# Capuras del sistema
+## Login y Sign Up
 
+| Login | Sign Up |
+|-------|---------|
+| <img src="./proyecto-catedra-frontend2/public/img/Capturas/Login.png" width="400"/> | <img src="./proyecto-catedra-frontend2/public/img/Capturas/SignUp.png" width="400"/> |
+
+## Pagina Principal
+  <img src="./proyecto-catedra-frontend2/public/img/Capturas/Principal.png" width="400"/>
+  
+## Ver perfil de administrador
+<img src="./proyecto-catedra-frontend2/public/img/Capturas/VerPerfil.png" width="400"/>
+
+
+## Ver torneos y ver jugadores
+
+| Torneos | Jugadores |
+|---------|-----------|
+| <img src="./proyecto-catedra-frontend2/public/img/Capturas/VerTorneos.png" width="400"/> | <img src="./proyecto-catedra-frontend2/public/img/Capturas/VerJugadores.png" width="400"/> |
+
+## Crear Torneos y Jugadores
+
+| Torneos | Jugadores |
+|---------|-----------|
+| <img src="./proyecto-catedra-frontend2/public/img/Capturas/CrearTorneo.png" width="400"/> | <img src="./proyecto-catedra-frontend2/public/img/Capturas/CrearJugador.png" width="400"/> |
+
+## Torneo individual y Jugador Individual
+
+| Torneos | Jugadores |
+|---------|-----------|
+| <img src="./proyecto-catedra-frontend2/public/img/Capturas/VerTorneoIndividual.png" width="400"/> | <img src="./proyecto-catedra-frontend2/public/img/Capturas/VerJugadorIndividual.png" width="400"/> |
+
+## Añadir jugadores al torneo
+
+<img src="./proyecto-catedra-frontend2/public/img/Capturas/AgregarJugadores.png" width="400"/>
+
+## Ver Estadisticas
+
+<img src="./proyecto-catedra-frontend2/public/img/Capturas/Estadisticas.png" width="400"/>
 
 # Instruciones para ejecutar el programa
 
-
-
-#1-Login
-#2-Sign Up
-#3-Pagina Principal
-#4-Ver perfil de administrador
-#5-Ver torneos
-#6-Crear Torneos
-#7-Torneo individual
-#8-añadir jugadores al torneo
-#9-Ver partidos
-#10-Ingresar resultados
-#11-Ver jugadores 
-#12-Ingresar participantes
-#13-jugador individual
-#14-Ver Estadisticas
