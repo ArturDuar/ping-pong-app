@@ -32,14 +32,14 @@ export const partidoService = {
     return data.data;
   },
 
-  syncSeries: async (id, series) => {
+  syncSeries: async (id, series, ganador_id) => {
     const response = await fetch(`${API_URL}/partidos/${id}/series`, {
       method: "POST",
       headers: {
         ...getAuthHeaders(),
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ series }),
+      body: JSON.stringify({ series, ganador_id }),
     });
 
     if (!response.ok) {
@@ -49,5 +49,6 @@ export const partidoService = {
 
     return await response.json();
   },
+
 
 }

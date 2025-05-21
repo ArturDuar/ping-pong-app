@@ -34,18 +34,6 @@ const Series = () => {
     setSeries(actualizadas);
   };
 
-  const handleElegirGanador = () => {
-    const total1 = series.reduce((acc, s) => acc + s.puntos_jugador1, 0);
-    const total2 = series.reduce((acc, s) => acc + s.puntos_jugador2, 0);
-
-    if (total1 > total2) {
-      alert(`Ganador: ${partido.jugador1.nombre}`);
-    } else if (total2 > total1) {
-      alert(`Ganador: ${partido.jugador2.nombre}`);
-    } else {
-      alert("Empate");
-    }
-  };
 
   const handleEliminarSerie = (index) => {
     const nuevasSeries = series.filter((_, i) => i !== index);
@@ -54,7 +42,26 @@ const Series = () => {
 
   const handleGuardarSeries = async () => {
     try {
-      await partidoService.syncSeries(id, series);
+
+      if(series.length === 0) {
+        alert("No hay series a guardar");
+        return;
+      }
+
+      if(!confirm("¿Estas seguro que deseas guardas los resultados de este partido?")) {
+        return;
+      }
+      const total1 = series.reduce((acc, s) => acc + s.puntos_jugador1, 0);
+      const total2 = series.reduce((acc, s) => acc + s.puntos_jugador2, 0);
+
+      let ganador_id = null;
+      if (total1 > total2) {
+        ganador_id = partido.jugador1.id;
+      } else if (total2 > total1) {
+        ganador_id = partido.jugador2.id;
+      }
+
+      await partidoService.syncSeries(id, series, ganador_id);
       alert("Series guardadas correctamente");
     } catch (err) {
       alert(`Error: ${err.message}`);
@@ -146,7 +153,7 @@ const Series = () => {
                   Agregar Serie
                 </button>
                 <button
-                  onClick={handleElegirGanador}
+                  onClick={handleGuardarSeries}
                   className="btn btn-success"
                 >
                   Elegir Ganador
