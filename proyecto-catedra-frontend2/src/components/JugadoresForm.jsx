@@ -31,6 +31,30 @@ const JugadoresForm = ({ tipo, jugadorInicial = null, onSubmit }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    // Validación manual de campos requeridos
+    const {
+      nombre_jugador,
+      nacionalidad,
+      fecha_nacimiento,
+      genero,
+      fotografia,
+    } = formData;
+
+    if (
+      !nombre_jugador ||
+      nombre_jugador.trim() === "" ||
+      !nacionalidad ||
+      nacionalidad.trim() === "" ||
+      !fecha_nacimiento ||
+      !genero ||
+      !fotografia
+    ) {
+      alert("Por favor, complete todos los campos antes de enviar.");
+      return;
+    }
+
+
     const data = await onSubmit(formData);
     navigate(`/jugadores/${data.id}`);
   };
@@ -53,6 +77,7 @@ const JugadoresForm = ({ tipo, jugadorInicial = null, onSubmit }) => {
                 onChange={handleChange}
                 placeholder="Ej. Arturo Duarte"
                 className="form-control border-0 text-white"
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -65,6 +90,7 @@ const JugadoresForm = ({ tipo, jugadorInicial = null, onSubmit }) => {
                 onChange={handleChange}
                 placeholder="Ej. Salvadoreña"
                 className="form-control border-0 text-white"
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -76,6 +102,7 @@ const JugadoresForm = ({ tipo, jugadorInicial = null, onSubmit }) => {
                 value={formData.fecha_nacimiento}
                 onChange={handleChange}
                 className="form-control border-0 text-white"
+                required
               />
             </div>
             <div className="form-group file-upload d-flex flex-column gap-2">
@@ -87,6 +114,7 @@ const JugadoresForm = ({ tipo, jugadorInicial = null, onSubmit }) => {
                 name="fotografia"
                 onChange={handleChange}
                 className="form-control rounded-1 file-update-custom border-0  text-white"
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -97,6 +125,7 @@ const JugadoresForm = ({ tipo, jugadorInicial = null, onSubmit }) => {
                 value={formData.genero}
                 onChange={handleChange}
                 className="form-control border-0 text-white form-select"
+                required
               >
                 <option value="">Seleccione un género</option>
                 <option value="Masculino">Masculino</option>
