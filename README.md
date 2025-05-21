@@ -79,33 +79,36 @@ Nuestro programa utiliza **Laravel** para el backend y **React con Vite** para e
 ### ⚙️ Instalación del Backend (Laravel)
 
 ```bash
-# Clonar el repositorio
+- Clonar el repositorio
 git clone https://github.com/ArturDuar/ping-pong-app.git
 cd ping-pong-app
 
-# Instalar dependencias de PHP
+-  Instalar dependencias de PHP
 composer install
 
-# Copiar el archivo de entorno
+- Copiar el archivo de entorno
 cp .env.example .env
 
-# Generar la clave de la aplicación
+- Generar la clave de la aplicación
 php artisan key:generate
 
-# Levantar el servidor de desarrollo
+- Levantar el servidor de desarrollo
 php artisan serve
 
-# Ejecutar migraciones
+- Ejecutar migraciones
 php artisan migrate
 
-# Poblar la base de datos con datos de prueba
+- Poblar la base de datos con datos de prueba
 php artisan db:seed
 
-# Ir al directorio del frontend
-cd frontend
+---
 
-# Instalar dependencias de Node
+### Frontend
+- Ir al directorio del frontend
+cd proyecto-catedra-frontend2
+
+- Instalar dependencias de Node
 npm install
 
-# Levantar el servidor de desarrollo
+- Levantar el servidor de desarrollo
 npm run dev
