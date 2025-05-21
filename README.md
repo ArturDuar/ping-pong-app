@@ -72,26 +72,27 @@ Desarrollo de Aplic. Web con Soft. Interpret. en el Servidor DSS404 G03T
 # Instruciones para ejecutar el programa
 # Ping Pong App
 
-Nuestro programa tiliza Laravel para el backend y React con Vite para el frontend.
+Nuestro programa utiliza **Laravel** para el backend y **React con Vite** para el frontend.
 
+---
 
-## ⚙️ Instalación del Backend (Laravel)
+### ⚙️ Instalación del Backend (Laravel)
 
-``bash
-## Clonar el repositorio
+```bash
+# Clonar el repositorio
 git clone https://github.com/ArturDuar/ping-pong-app.git
 cd ping-pong-app
 
-## Instalar dependencias de PHP
+# Instalar dependencias de PHP
 composer install
 
 # Copiar el archivo de entorno
 cp .env.example .env
 
-## Generar la clave de la aplicación
+# Generar la clave de la aplicación
 php artisan key:generate
 
-## Levantar el servidor de desarrollo
+# Levantar el servidor de desarrollo
 php artisan serve
 
 # Ejecutar migraciones
@@ -100,12 +101,11 @@ php artisan migrate
 # Poblar la base de datos con datos de prueba
 php artisan db:seed
 
-
-## Ir al directorio del frontend
+# Ir al directorio del frontend
 cd frontend
 
-## Instalar dependencias de Node
+# Instalar dependencias de Node
 npm install
 
-## Levantar el servidor de desarrollo
+# Levantar el servidor de desarrollo
 npm run dev
