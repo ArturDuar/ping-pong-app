@@ -69,46 +69,78 @@ Desarrollo de Aplic. Web con Soft. Interpret. en el Servidor DSS404 G03T
 
 <img src="./proyecto-catedra-frontend2/public/img/Capturas/Estadisticas.png" width="400"/>
 
-# Instruciones para ejecutar el programa
-# Ping Pong App
+---
 
-Nuestro programa utiliza **Laravel** para el backend y **React con Vite** para el frontend.
+# 🏓 Ping Pong App
+
+Aplicación web construida con **Laravel** para el backend y **React + Vite** para el frontend.
+
+---
+1. **Clona el repositorio**
+
+   ```bash
+   git clone https://github.com/ArturDuar/ping-pong-app.git
+   cd ping-pong-app
+   ```
+   
+   ## ⚙️ Instalación del Backend (Laravel)
+
+2. **Instala las dependencias de PHP**
+
+   ```bash
+   composer install
+   ```
+
+3. **Copia el archivo de entorno**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+4. **Genera la clave de la aplicación**
+
+   ```bash
+   php artisan key:generate
+   ```
+
+5. **Ejecuta las migraciones**
+
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Puebla la base de datos con datos de prueba**
+
+   ```bash
+   php artisan db:seed
+   ```
+
+7. **Levanta el servidor de desarrollo**
+
+   ```bash
+   php artisan serve
+   ```
 
 ---
 
-### ⚙️ Instalación del Backend (Laravel)
+##  Instalación del Frontend (React + Vite)
 
-```bash
-- Clonar el repositorio
-git clone https://github.com/ArturDuar/ping-pong-app.git
-cd ping-pong-app
+1. **Navega al directorio del frontend**
 
--  Instalar dependencias de PHP
-composer install
+   ```bash
+   cd proyecto-catedra-frontend2
+   ```
 
-- Copiar el archivo de entorno
-cp .env.example .env
+2. **Instala las dependencias de Node**
 
-- Generar la clave de la aplicación
-php artisan key:generate
+   ```bash
+   npm install
+   ```
 
-- Levantar el servidor de desarrollo
-php artisan serve
+3. **Levanta el servidor de desarrollo**
 
-- Ejecutar migraciones
-php artisan migrate
-
-- Poblar la base de datos con datos de prueba
-php artisan db:seed
+   ```bash
+   npm run dev
+   ```
 
 ---
-
-Frontend
-- Ir al directorio del frontend
-cd proyecto-catedra-frontend2
-
-- Instalar dependencias de Node
-npm install
-
-- Levantar el servidor de desarrollo
-npm run dev
