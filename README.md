@@ -103,7 +103,7 @@ php artisan db:seed
 
 ---
 
-### Frontend
+Frontend
 - Ir al directorio del frontend
 cd proyecto-catedra-frontend2
 
