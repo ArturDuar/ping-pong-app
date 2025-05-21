@@ -53,6 +53,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 placeholder="Ej. Copa Nacional"
                 className="form-control border-0 text-white"
                 disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -66,6 +67,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 placeholder="Ej. Estadio Nacional"
                 className="form-control border-0 text-white"
                 disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">
@@ -78,6 +80,7 @@ const TorneosForm = ({ tipo, torneoInicial = null, onSubmit }) => {
                 onChange={handleChange}
                 className="form-control border-0 text-white"
                 disabled={torneoInicial && torneoInicial.estado !== "Próximo"}
+                required
               />
             </div>
             <div className="form-group d-flex flex-column gap-2">

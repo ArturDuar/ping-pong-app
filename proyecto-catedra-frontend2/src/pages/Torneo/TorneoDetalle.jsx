@@ -31,17 +31,6 @@ const TorneoDetalle = () => {
     }
   };
 
-  const handleIngresarResultados = () => {
-    if (confirm("¿Deseas comenzar este torneo?")) {
-      if (torneo.jugadores.length < torneo.num_participantes) {
-        alert(
-          "No se puede dar por comenzado el torneo, no hay suficientes jugadores para el torneo."
-        );
-        return;
-      }
-      navigate(`/torneos/${torneo.id}/ingresar-resultados`);
-    }
-  };
 
   return (
     <Dashboard>
@@ -53,39 +42,71 @@ const TorneoDetalle = () => {
           </Link>
         </div>
 
-        <div className="card border-0 card-bg rounded shadow">
+        <div className="card border-0 card-bg rounded shadow p-4">
           <div className="row gx-4 gy-4">
             {/* Controles de acción */}
             <div className="col-md-3 col-12 d-flex flex-column gap-3">
-              <Link to={`/torneos/${torneo.id}/agregar-participantes`}>
-                <button className="w-100 btn btn-primary rounded ">
-                  Agregar participantes
-                </button>
-              </Link>
-
-              <Link to={`/torneos/${torneo.id}/partidos`}>
-                <button className="w-100 btn btn-success rounded ">
-                  Ver Partidos
-                </button>
-              </Link>
-
-              <Link to={`/torneos/editar-torneo/${torneo.id}`}>
-                <button className="w-100 btn btn-secondary rounded ">
-                  Editar Torneo
-                </button>
-              </Link>
+              <button
+                className="w-100 btn btn-primary rounded"
+                onClick={() =>
+                  navigate(`/torneos/${torneo.id}/agregar-participantes`)
+                }
+              >
+                Agregar participantes
+              </button>
 
               <button
-                className="w-100 btn btn-danger rounded "
+                className="w-100 btn btn-success rounded"
+                onClick={() => navigate(`/torneos/${torneo.id}/partidos`)}
+              >
+                Ver Partidos
+              </button>
+
+              <button
+                className="w-100 btn btn-secondary rounded"
+                onClick={() => navigate(`/torneos/editar-torneo/${torneo.id}`)}
+              >
+                Editar Torneo
+              </button>
+
+              <button
+                className="w-100 btn btn-danger rounded"
                 onClick={handleDelete}
               >
                 Eliminar torneo
               </button>
+
+              {/* Ganador */}
+              <div className="bg-dark card text-white h-100">
+                <h5 className="">Ganador</h5>
+                <div className="card-body">
+                  {torneo.ganador ? (
+                    <div className="text-center">
+                      <img
+                        src={torneo.ganador.enlace_fotografia}
+                        alt="Jugador"
+                        className="rounded w-100 mb-2"
+                        style={{
+                          height: "250px",
+                          objectFit: "cover",
+                          cursor: "pointer",
+                        }}
+                        onClick={() => navigate(`/jugadores/${torneo.ganador.id}`)}
+                      />
+                      <div className="text-wrap fw-bolder">
+                        {torneo.ganador.nombre_jugador.toUpperCase()}
+                      </div>
+                    </div>
+                  ) : (
+                    <p className="text-muted text-center">Sin ganador</p>
+                  )}
+                </div>
+              </div>
             </div>
 
             {/* Detalles del torneo */}
             <div className="col-md-9 col-12">
-              <div className="card p-3">
+              <div className="card p-3 h-100">
                 <h4>{torneo.nombre_torneo}</h4>
                 <table className="table">
                   <tbody>
@@ -109,7 +130,7 @@ const TorneoDetalle = () => {
                     </tr>
                     <tr>
                       <td>
-                        <strong>Categoria:</strong>
+                        <strong>Categoría:</strong>
                       </td>
                       <td>{torneo.categoria_genero}</td>
                     </tr>
@@ -133,68 +154,52 @@ const TorneoDetalle = () => {
                     </tr>
                   </tbody>
                 </table>
-                <table className="table w-100">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <strong>Jugadores</strong>
-                      </td>
-                    </tr>
-                    {torneo.jugadores.length === 0 ? (
-                      <tr>
-                        <td className="text-center">
-                          <div className="text-white">
-                            No hay jugadores añadidos.
-                          </div>
-                        </td>
-                      </tr>
-                    ) : (
-                      <tr>
-                        <td>
-                          {/* Contenedor con scroll horizontal */}
-                          <div
-                            className="d-flex overflow-auto"
+
+                {/* Jugadores */}
+                <div className="mt-4">
+                  <h5>Jugadores</h5>
+                  {torneo.jugadores.length === 0 ? (
+                    <div className="text-white">No hay jugadores añadidos.</div>
+                  ) : (
+                    <div
+                      className="d-flex overflow-auto"
+                      style={{
+                        whiteSpace: "nowrap",
+                        width: "100%",
+                      }}
+                    >
+                      {torneo.jugadores.map((jugador) => (
+                        <div
+                          key={jugador.id}
+                          className="position-relative bg-dark text-white text-center shadow me-2 cursor-pointer"
+                          style={{
+                            width: "100px",
+                            minWidth: "100px",
+                            flex: "0 0 auto",
+                            borderRadius: "8px",
+                          }}
+                          onClick={() => navigate(`/jugadores/${jugador.id}`)}
+                        >
+                          <img
+                            src={
+                              jugador.enlace_fotografia ||
+                              "/img/avatar_femenino.png"
+                            }
+                            alt="Jugador"
+                            className="rounded w-100"
                             style={{
-                              whiteSpace: "nowrap",
-                              width: "100%",
+                              height: "100px",
+                              objectFit: "cover",
                             }}
-                          >
-                            {torneo.jugadores.map((jugador) => (
-                              <div
-                                key={jugador.id}
-                                className="position-relative bg-dark shadow cursor-pointer me-2 text-center text-white"
-                                style={{
-                                  width: "100px",
-                                  minWidth: "100px",
-                                  flex: "0 0 auto",
-                                }}
-                                onClick={() =>
-                                  navigate(`/jugadores/${jugador.id}`)
-                                }
-                              >
-                                <img
-                                  src={
-                                    jugador.enlace_fotografia ||
-                                    "/img/avatar_femenino.png"
-                                  }
-                                  alt="Jugador"
-                                  className="rounded w-100"
-                                  style={{
-                                    height: "100px",
-                                    objectFit: "cover",
-                                  }}
-                                />
-                                <div className="mt-2 text-wrap">
-                                  {jugador.nombre_jugador}
-                                </div>
-                              </div>
-                            ))}
+                          />
+                          <div className="mt-2 text-wrap px-1">
+                            {jugador.nombre_jugador}
                           </div>
-                        </td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 import Dashboard from "../../layout/Dashboard";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { estadisticasService } from "../../services/EstadisticasService"; // importa el servicio
+import { estadisticasService } from "../../services/EstadisticasService";
 
 const VerEstadisticas = () => {
   const navigate = useNavigate();
@@ -27,10 +27,12 @@ const VerEstadisticas = () => {
     <Dashboard>
       <div className="container py-5">
         <div className="d-flex flex-column flex-md-row align-items-center justify-content-between mb-4">
-          <h2 className="fw-bold mb-3 mb-md-0 text-center w-100" style={{ color: "#fff" }}>
+          <h2
+            className="fw-bold mb-3 mb-md-0 text-center w-100"
+            style={{ color: "#fff" }}
+          >
             Estadísticas generales
           </h2>
-          
         </div>
 
         {error && (
@@ -40,9 +42,13 @@ const VerEstadisticas = () => {
         )}
 
         <div className="table-responsive mb-4">
-          <table className="table table-bordered" style={{ background: "#181818", color: "#fff" }}>
+          <table
+            className="table table-bordered"
+            style={{ background: "#181818", color: "#fff" }}
+          >
             <thead>
               <tr className="bg-pink-header">
+                <th>Foto</th>
                 <th>Nombre del Jugador</th>
                 <th>Partidos Jugados</th>
                 <th>Partidos Ganados</th>
@@ -53,6 +59,18 @@ const VerEstadisticas = () => {
               {jugadores.length > 0 ? (
                 jugadores.map((jugador) => (
                   <tr key={jugador.id}>
+                    <td className="text-center">
+                      <img
+                        src={jugador.enlace_fotografia}
+                        alt={jugador.nombre_jugador}
+                        style={{
+                          width: "40px",
+                          height: "40px",
+                          objectFit: "cover",
+                          borderRadius: "50%",
+                        }}
+                      />
+                    </td>
                     <td>{jugador.nombre_jugador}</td>
                     <td>{jugador.partidos_jugados}</td>
                     <td>{jugador.partidos_ganados}</td>
@@ -61,7 +79,7 @@ const VerEstadisticas = () => {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="4" className="text-center">
+                  <td colSpan="5" className="text-center">
                     No hay datos disponibles.
                   </td>
                 </tr>

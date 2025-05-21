@@ -3,13 +3,17 @@ import Dashboard from "../../layout/Dashboard";
 import { useParams } from "react-router-dom";
 import { partidoService } from "../../services/PartidoService";
 import { Link } from "react-router-dom";
+import { useTorneoContext } from "../../contexts/TorneoContext";
 
 const Partidos = () => {
   const { id } = useParams(); // id del torneo
   const [partidos, setPartidos] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [generando, setGenerando] = useState(false); // para mostrar carga al generar
+  const [generando, setGenerando] = useState(false);
+  const [torneo, setTorneo] = useState(null);
+  const { getById } = useTorneoContext();
+  // para mostrar carga al generar
 
   useEffect(() => {
     const fetchPartidosdelTorneo = async () => {
@@ -28,10 +32,27 @@ const Partidos = () => {
     fetchPartidosdelTorneo();
   }, [id]);
 
+  useEffect(() => {
+    if (id) {
+      const fetchTorneo = async () => {
+        const data = await getById(id);
+        console.log("data:", data);
+        setTorneo(data);
+      };
+      fetchTorneo();
+    }
+  }, [id, getById]);
+
   const handleGenerarPartidos = async () => {
     try {
       setGenerando(true);
       setError(null);
+
+      if (!torneo.jugadores || torneo.jugadores.length === 0) {
+        alert("No hay jugadores añadidos");
+        return;
+      }
+
       await partidoService.generarPartidos(id); // genera en el backend
       const partidosActualizados = await partidoService.getAll(id); // vuelve a pedirlos
       setPartidos(partidosActualizados); // actualiza la vista
@@ -79,32 +100,72 @@ const Partidos = () => {
 
       <div className="d-flex flex-wrap gap-3 container">
         {rondasOrdenadas.map((ronda) => (
-          <div key={ronda} className="mb-4">
+          <div key={ronda} className="mb-4 w-100">
             <h3 className="w-100">Ronda {ronda}</h3>
             <div className="d-flex flex-row flex-wrap gap-3">
               {partidosPorRonda[ronda].map((partido) => (
                 <div
                   key={partido.id}
-                  className="card bg-dark text-white shadow"
-                  style={{ minWidth: "150px", maxWidth: "280px" }}
+                  className="card card-bg text-white shadow-lg p-3 mb-4"
+                  style={{
+                    borderRadius: "1rem",
+                    minWidth: "260px",
+                    maxWidth: "340px",
+                    margin: "auto",
+                  }}
                 >
-                  <div className="card-body">
-                    <p className="card-text mb-1">
-                      <strong>Jugador 1:</strong> {partido.jugador1?.nombre}
-                    </p>
-                    <p className="card-text mb-1">
-                      <strong>Jugador 2:</strong> {partido.jugador2?.nombre}
-                    </p>
-                    <p className="card-text mb-0">
+                  <div className="card-body text-center">
+                    <h5 className="mb-3">Partido #{partido.id}</h5>
+
+                    <div className="d-flex justify-content-around align-items-center mb-4">
+                      <div className="text-center">
+                        <img
+                          src={partido.jugador1?.fotografia}
+                          alt="Jugador 1"
+                          className="rounded-circle mb-2"
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p className="mb-0">
+                          <strong>{partido.jugador1?.nombre}</strong>
+                        </p>
+                      </div>
+
+                      <div className="text-white-50 mx-2">vs</div>
+
+                      <div className="text-center">
+                        <img
+                          src={partido.jugador2?.fotografia}
+                          alt="Jugador 2"
+                          className="rounded-circle mb-2"
+                          style={{
+                            width: "80px",
+                            height: "80px",
+                            objectFit: "cover",
+                          }}
+                        />
+                        <p className="mb-0">
+                          <strong>{partido.jugador2?.nombre}</strong>
+                        </p>
+                      </div>
+                    </div>
+
+                    <p className="card-text">
                       <strong>Ganador:</strong>{" "}
                       {partido.ganador ? (
-                        partido.ganador.nombre
+                        <span className="text-success">
+                          {partido.ganador.nombre}
+                        </span>
                       ) : (
                         <span className="text-muted">Sin definir</span>
                       )}
                     </p>
+
                     <Link to={`/torneos/partidos/${partido.id}/series`}>
-                      <button className="btn btn-primary mt-3">
+                      <button className="btn btn-primary mt-2">
                         Ver series
                       </button>
                     </Link>

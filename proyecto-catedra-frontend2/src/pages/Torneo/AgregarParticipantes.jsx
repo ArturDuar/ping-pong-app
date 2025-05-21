@@ -36,12 +36,14 @@ const AgregarParticipantes = () => {
     .map((pid) => jugadores.find((j) => j.id === pid))
     .filter(Boolean);
 
-  const jugadoresDisponibles = jugadores.filter(
-    (j) =>
-      !participantes.includes(j.id) &&
-      torneo?.categoria_genero &&
-      j.genero === torneo.categoria_genero
-  );
+  const jugadoresDisponibles = torneo
+    ? jugadores.filter(
+        (j) =>
+          !participantes.includes(j.id) &&
+          (torneo.categoria_genero === "Mixto" ||
+            j.genero === torneo.categoria_genero)
+      )
+    : [];
 
   const opcionesJugadores = jugadoresDisponibles.map((jugador) => ({
     value: jugador.id,
@@ -72,8 +74,6 @@ const AgregarParticipantes = () => {
     const numMax = torneo.num_participantes;
     const actual = participantes.length;
 
-    // Puedes descomentar esta parte si quieres forzar la cantidad exacta:
-    /*
     if (actual < numMax) {
       alert(`Debes añadir al menos ${numMax} jugadores.`);
       return;
@@ -82,7 +82,6 @@ const AgregarParticipantes = () => {
       alert(`No puedes añadir más de ${numMax} jugadores.`);
       return;
     }
-    */
 
     try {
       await addJugadores(torneo.id, participantes);
@@ -96,8 +95,7 @@ const AgregarParticipantes = () => {
     navigate(`/torneos/${torneo?.id || ""}`);
   };
 
-  if(!torneo)
-    return <p className="text-center mt-5">Torneo no disponible</p>;
+  if (!torneo) return <p className="text-center mt-5">Torneo no disponible</p>;
 
   return (
     <Dashboard>
@@ -108,10 +106,11 @@ const AgregarParticipantes = () => {
         >
           {torneo ? torneo.nombre_torneo : "Nombre del torneo"}
         </h2>
-          {torneo.estado !== "Próximo" && <p className="text-danger mb-3">Ya no puede agregar más jugadores.</p>}
+        {torneo.estado !== "Próximo" && (
+          <p className="text-danger mb-3">Ya no puede agregar más jugadores.</p>
+        )}
         {/* Fila única para select y botones */}
         <div className="d-flex align-items-end flex-wrap gap-2 mb-4">
-          
           <div className="flex-grow-1">
             <label className="form-label text-white mb-1">
               Elige un jugador

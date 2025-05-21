@@ -73,7 +73,7 @@ class SerieController extends Controller
         $ganadores = $partidosRonda->pluck('ganador_id')->shuffle();
 
         if ($ganadores->count() === 1) {
-            $torneo->update(['estado' => 3, 'ganador_id' => $ganadores->first()]);
+            $torneo->update(['id_estado' => 3, 'id_ganador' => $ganadores->first()]);
             return;
         }
 

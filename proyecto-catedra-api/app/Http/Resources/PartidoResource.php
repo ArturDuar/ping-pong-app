@@ -21,7 +21,7 @@ class PartidoResource extends JsonResource
             'jugador1' => [
                 'id' => $this->jugador1->id,
                 'nombre' => $this->jugador1->nombre_jugador,
-                'fotografia' => $this->jugador2->enlace_fotografia,
+                'fotografia' => $this->jugador1->enlace_fotografia,
             ],
             'jugador2' => [
                 'id' => $this->jugador2->id,

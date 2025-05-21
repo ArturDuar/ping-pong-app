@@ -57,7 +57,7 @@ const Header = () => {
                                 Crear nuevo
                             </NavDropdown.Item>
                         </NavDropdown>
-                        <Nav.Link href="/estadisticas" className="text-white">
+                        <Nav.Link href="/estadisticas">
                             Estadísticas
                         </Nav.Link>
                     </Nav>

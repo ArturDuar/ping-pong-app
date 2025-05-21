@@ -24,6 +24,7 @@ class TorneoResource extends JsonResource
             'categoria_genero' => $this->categoria_genero,
             'num_participantes' => $this->num_participantes,
             'jugadores' => JugadorResource::collection($this->jugadores),
+            'ganador' => $this->ganador ? JugadorResource::make($this->ganador) : null,
             'estado' =>$this->estado->nombre_estado,
         ];
     }
